@@ -39,7 +39,7 @@ export default function Skills() {
       {/* Conteúdo z-10 para ficar acima do grid */}
       <div className="relative z-10 flex flex-col items-center w-full">
         {/* Título centralizado */}
-        <h2 className="text-6xl font-bold font-comic text-[#181922] mb-20 text-center ">
+        <h2 className="text-6xl font-bold text-[#181922] mb-20 text-center ">
           My Skills
         </h2>
 
@@ -73,7 +73,10 @@ export default function Skills() {
 
                 {/* NOME E TIPO */}
                 <div className="mt-4 text-center">
-                  <h3 className="text-xl font-bold font-comic text-[#181922] leading-tight">
+                  <h3
+                    className="text-xl font-bold
+                   text-[#181922] leading-tight"
+                  >
                     {skill.name}
                   </h3>
                   <p className="text-[10px] font-sans text-white font-bold uppercase tracking-widest mt-1">

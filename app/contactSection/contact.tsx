@@ -12,7 +12,7 @@ export default function Contact() {
     >
       {/* Título de Chamada */}
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold font-comic text-white mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
           Let is Work Together!
         </h2>
         <p className="text-gray-400 font-sans uppercase tracking-[0.2em] text-sm">
@@ -44,9 +44,7 @@ export default function Contact() {
               <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
                 Discord
               </p>
-              <p className="text-xl font-bold font-comic text-[#181922]">
-                @YouBrenno
-              </p>
+              <p className="text-xl font-bold text-[#181922]">@YouBrenno</p>
             </div>
           </div>
 
@@ -64,7 +62,7 @@ export default function Contact() {
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
                   X twitter
                 </p>
-                <p className="text-xl font-bold font-comic text-[#181922]">
+                <p className="text-xl font-bold text-[#181922]">
                   @YouBrenno_edits
                 </p>
               </div>
@@ -85,7 +83,7 @@ export default function Contact() {
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
                   E-mail
                 </p>
-                <p className="text-lg md:text-xl font-bold font-comic text-[#181922] break-all">
+                <p className="text-lg md:text-xl font-bold text-[#181922] break-all">
                   ybrenno.contact@gmail.com
                 </p>
               </div>

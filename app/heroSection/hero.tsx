@@ -44,14 +44,12 @@ export default function Hero() {
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#181922]/10 hover:scale-130 duration-200 cursor-pointer">
             <Image src={YouBrenno} alt="Logo" className="object-cover" />
           </div>
-          <span className="font-bold font-comic text-[#181922] text-lg">
-            YouBrenno
-          </span>
+          <span className="font-bold text-[#181922] text-lg">YouBrenno</span>
         </div>
 
         {/* Menu Desktop */}
         <nav className="hidden md:block">
-          <ul className="flex gap-x-8 text-sm font-bold font-comic text-[#181922]">
+          <ul className="flex gap-x-8 text-sm font-bold text-[#181922]">
             <li>
               <a href="#" className="hover:text-blue-600 transition-colors">
                 Home
@@ -107,11 +105,11 @@ export default function Hero() {
 
       {/* HEADER PRINCIPAL (Hero) */}
       <header className="sticky top-0 w-full p-6 md:p-8 flex justify-between items-center max-w-6xl bg-[#181922] text-white z-50 md:rounded-b-3xl shadow-2xl">
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tight font-comic">
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
           What is up?
         </h2>
         <nav className="hidden md:block">
-          <ul className="flex gap-x-8 text-xl font-comic">
+          <ul className="flex gap-x-8 text-xl">
             <li>
               <a href="#" className="hover:text-gray-400">
                 Home
@@ -151,7 +149,7 @@ export default function Hero() {
       <nav
         className={`fixed top-0 right-0 h-screen bg-white z-[110] shadow-2xl transition-all duration-300 md:hidden ${menu ? "w-64 translate-x-0" : "w-0 translate-x-full"} overflow-hidden`}
       >
-        <ul className="flex flex-col text-3xl p-8 py-24 gap-y-8 text-black font-comic">
+        <ul className="flex flex-col text-3xl p-8 py-24 gap-y-8 text-black">
           <li>
             <a href="#" onClick={() => setMenu(false)}>
               Home
@@ -200,7 +198,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-bold mb-8 font-comic text-[#181922]">
+        <h1 className="text-4xl md:text-6xl font-bold mb-8 text-[#181922]">
           YouBrenno
         </h1>
 
@@ -228,7 +226,7 @@ export default function Hero() {
           />
         </div>
 
-        <p className="max-w-xs md:max-w-2xl text-xl md:text-3xl font-comic text-gray-700 leading-snug">
+        <p className="max-w-xs md:max-w-2xl text-xl md:text-3xl text-gray-700 leading-snug">
           Specializing in <span className="text-blue-600">Roblox</span>,{" "}
           <span className="text-green-600">Minecraft</span> shorts, and
           long-form videos
