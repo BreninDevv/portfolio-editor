@@ -1,13 +1,11 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Comic_Neue:wght@400;700&display=swap");
 
+/* 2. Depois as importações de fontes externas */
+
+/* 3. Só agora as definições de tema e outras regras */
 @theme {
-  --font-itim: var(--font-itim);
-  --font-pacifico: var(--font-pacifico);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-
-  --font-comic: "Comic Neue", cursive;
+  --font-itim: "Itim", cursive;
+  --font-pacifico: "Pacifico", cursive;
 }
 
 html {
