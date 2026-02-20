@@ -26,7 +26,10 @@ export default function Edits() {
   ];
 
   return (
-    <section className="w-full bg-white py-16 px-6 flex flex-col items-center">
+    <section
+      id="edits"
+      className="w-full bg-white py-16 px-6 flex flex-col items-center"
+    >
       <h2 className="text-4xl font-bold font-comic text-[#181922] mb-16 text-center">
         My Best Edits
       </h2>
@@ -36,7 +39,6 @@ export default function Edits() {
         <div className="flex items-center gap-4 mb-10 border-b-4 border-[#181922] pb-4">
           {/* PLACEHOLDER PARA LOGO MINECRAFT */}
           <div className="w-12 h-12 bg-gray-200 rounded-lg border-2 border-black flex items-center justify-center overflow-hidden">
-            {/* <Image src={SuaLogoAqui} alt="Minecraft Logo" /> */}
             <Image src={Minecraft} alt="Minecraft Logo" />
           </div>
           <h3 className="text-3xl font-bold font-comic text-[#181922]">
@@ -44,7 +46,7 @@ export default function Edits() {
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 cursor-pointer">
           {minecraftEdits.map((item) => (
             <VideoCard key={item.id} item={item} />
           ))}
@@ -56,7 +58,6 @@ export default function Edits() {
         <div className="flex items-center gap-4 mb-10 border-b-4 border-[#181922] pb-4">
           {/* PLACEHOLDER PARA LOGO ROBLOX */}
           <div className="w-12 h-12 bg-gray-200 rounded-lg border-2 border-black flex items-center justify-center overflow-hidden">
-            {/* <Image src={SuaLogoAqui} alt="Roblox Logo" /> */}
             <Image src={Roblox} alt="Roblox Logo" />
           </div>
           <h3 className="text-3xl font-bold font-comic text-[#181922]">
@@ -64,7 +65,7 @@ export default function Edits() {
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 cursor-pointer">
           {robloxEdits.map((item) => (
             <VideoCard key={item.id} item={item} />
           ))}

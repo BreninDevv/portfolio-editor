@@ -19,7 +19,10 @@ export default function Skills() {
 
   return (
     /* Seção com posição relativa para o grid funcionar */
-    <section className="relative w-full min-h-screen bg-[#61b8ff] py-12 px-6 flex flex-col items-center justify-center lg:pt-40 lg:pb-40 overflow-hidden pb-35">
+    <section
+      id="skills"
+      className="relative w-full min-h-screen bg-[#61b8ff] py-12 px-6 flex flex-col items-center justify-center lg:pt-40 lg:pb-40 overflow-hidden pb-35"
+    >
       {/* BACKGROUND GRID - Azul sutil para combinar com o fundo */}
       <div
         className="absolute inset-0 z-0 opacity-[0.7]"
