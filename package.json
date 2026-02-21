@@ -162,7 +162,6 @@
     "language-tags": "^1.0.9",
     "levn": "^0.4.1",
     "lightningcss": "^1.31.1",
-    "lightningcss-win32-x64-msvc": "^1.31.1",
     "locate-path": "^6.0.0",
     "lodash.merge": "^4.6.2",
     "loose-envify": "^1.4.0",
@@ -293,6 +292,7 @@
   },
   "homepage": "https://github.com/BreninDevv/portfolio-editor#readme",
   "optionalDependencies": {
-    "lightningcss-linux-x64-gnu": "^1.31.1"
+    "lightningcss-linux-x64-gnu": "^1.31.1",
+    "lightningcss-win32-x64-msvc": "^1.31.1"
   }
 }
