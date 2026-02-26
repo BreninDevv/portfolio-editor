@@ -73,7 +73,7 @@ export default function Contact() {
           <div className="group flex items-center gap-4 bg-white rounded-2xl border-[3px] border-white shadow-[6px_6px_0px_0px_rgba(100,100,100,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none cursor-pointer">
             <a
               href="mailto:ybrenno.contact@gmail.com"
-              className="flex items-center gap-4 p-4 pr-15"
+              className="flex items-center gap-4 p-4 pr-10"
               target="_blank"
             >
               <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center overflow-hidden">
