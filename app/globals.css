@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+/* 2. Depois as importações de fontes externas */
+
+/* 3. Só agora as definições de tema e outras regras */
+@theme {
+  --font-itim: "Itim", cursive;
+  --font-pacifico: "Pacifico", cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+}
