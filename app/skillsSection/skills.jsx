@@ -2,7 +2,7 @@ import Image from "next/image";
 import Capcut from "../../public/capcut.png";
 import Premiere from "../../public/premiere.png";
 import AfterEffects from "../../public/aftereffects.png";
-import Tiktok from "../../public/tiktok.png";
+import DaVinci from "../../public/davinci.png";
 import Youtube from "../../public/youtube.png";
 import Shorts from "../../public/shorts.png";
 import Personagem1 from "../../public/personagem1.png";
@@ -12,7 +12,7 @@ export default function Skills() {
     { id: 1, name: "CapCut", type: "Software", img: Capcut },
     { id: 2, name: "After Effects", type: "Software", img: AfterEffects },
     { id: 3, name: "Premiere Pro", type: "Software", img: Premiere },
-    { id: 4, name: "TikTok", type: "Format", img: Tiktok },
+    { id: 4, name: "DaVinci", type: "Software", img: DaVinci },
     { id: 5, name: "Short Form", type: "Format", img: Shorts },
     { id: 6, name: "Long Form", type: "Format", img: Youtube },
   ];
