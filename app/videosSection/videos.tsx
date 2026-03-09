@@ -39,9 +39,15 @@ export default function Edits() {
         <div className="flex items-center gap-4 mb-10 border-b-4 border-[#181922] pb-4">
           {/* PLACEHOLDER PARA LOGO MINECRAFT */}
           <div className="w-12 h-12 bg-gray-200 rounded-lg border-2 border-black flex items-center justify-center overflow-hidden">
+<<<<<<< HEAD
             <Image src={Roblox} alt="Roblox Logo" />
           </div>
           <h3 className="text-3xl font-bold  text-[#181922]">Roblox</h3>
+=======
+            <Image src={Minecraft} alt="Minecraft Logo" />
+          </div>
+          <h3 className="text-3xl font-bold  text-[#181922]">Minecraft</h3>
+>>>>>>> 046aed0e5ecda81fbbb05add2af4edc59e41c496
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 cursor-pointer">
@@ -53,6 +59,17 @@ export default function Edits() {
 
       {/* --- SEÇÃO ROBLOX --- */}
       <div className="w-full max-w-6xl">
+<<<<<<< HEAD
+=======
+        <div className="flex items-center gap-4 mb-10 border-b-4 border-[#181922] pb-4">
+          {/* PLACEHOLDER PARA LOGO ROBLOX */}
+          <div className="w-12 h-12 bg-gray-200 rounded-lg border-2 border-black flex items-center justify-center overflow-hidden">
+            <Image src={Roblox} alt="Roblox Logo" />
+          </div>
+          <h3 className="text-3xl font-bold  text-[#181922]">Roblox</h3>
+        </div>
+
+>>>>>>> 046aed0e5ecda81fbbb05add2af4edc59e41c496
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 cursor-pointer">
           {robloxEdits.map((item) => (
             <VideoCard key={item.id} item={item} />

@@ -227,8 +227,14 @@ export default function Hero() {
         </div>
 
         <p className="max-w-xs md:max-w-2xl text-xl md:text-3xl text-gray-700 leading-snug">
+<<<<<<< HEAD
           Specializing in <span className="text-blue-600">Roblox</span>{" "}
           <span className="text-green-600"></span> shorts, and long-form videos
+=======
+          Specializing in <span className="text-blue-600">Roblox</span>,{" "}
+          <span className="text-green-600">Minecraft</span> shorts, and
+          long-form videos
+>>>>>>> 046aed0e5ecda81fbbb05add2af4edc59e41c496
         </p>
       </div>
     </section>
