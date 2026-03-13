@@ -1,5 +1,7 @@
 import Image from "next/image";
 import RobloxLogo from "../../public/roblox.png";
+import YT from "../../public/yt.png";
+import Twitch from "../../public/twitch.png";
 
 export default function Niches() {
   const nicheData = [
@@ -13,13 +15,13 @@ export default function Niches() {
       id: 2,
       title: "IRL Stream",
       slogan: "I turn IRL stream moments into highlights.",
-      icon: null,
+      icon: Twitch,
     },
     {
       id: 3,
       title: "Dark Channels",
       slogan: "Mysterious narratives with compelling visual styles.",
-      icon: null,
+      icon: YT,
     },
   ];
 
