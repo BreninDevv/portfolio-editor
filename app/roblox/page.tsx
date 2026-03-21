@@ -33,11 +33,11 @@ export default function RobloxNichePage() {
     },
     {
       id: 3,
-      title: "Brookhaven Story",
+      title: "Intro Roblox Video",
       category: "Long Form",
       type: "horizontal",
-      creator: "@YouBrenno",
-      videoUrl: "",
+      creator: "@Suetam",
+      videoUrl: "https://youtu.be/UifySD1GzYU",
     },
     {
       id: 4,
