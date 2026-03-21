@@ -156,7 +156,9 @@ export default function IRLNichePage() {
             IRL Edits
           </h2>
         </div>
-
+        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-15 text-center">
+          All videos have been edited for technical demonstration purposes ONLY.
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {irlEdits.map((item) => (
             <VideoCard key={item.id} item={item} />

@@ -87,6 +87,9 @@ export default function Edits() {
 
       {/* SEÇÃO ROBLOX */}
       <NicheSection title="Roblox" icon={RobloxLogo} viewMoreHref="/roblox">
+        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
+          All videos have been edited for technical demonstration purposes ONLY.
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
           {robloxEdits.map((item, index) => (
             <VideoCard key={index} item={item} />
@@ -96,6 +99,9 @@ export default function Edits() {
 
       {/* SEÇÃO IRL STREAM */}
       <NicheSection title="IRL Stream" viewMoreHref="/irl">
+        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
+          All videos have been edited for technical demonstration purposes ONLY.
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
           {irlEdits.map((item, index) => (
             <VideoCard key={index} item={item} />
@@ -105,6 +111,9 @@ export default function Edits() {
 
       {/* SEÇÃO DESCONHECIDA */}
       <NicheSection title="Unknown Niche" viewMoreHref="/dark">
+        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
+          All videos have been edited for technical demonstration purposes ONLY.
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
           {unknownEdits.map((item, index) => (
             <VideoCard key={index} item={item} />
