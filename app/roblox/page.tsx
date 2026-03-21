@@ -17,11 +17,11 @@ export default function RobloxNichePage() {
   const robloxEdits = [
     {
       id: 1,
-      title: "Bedwars Clutch",
+      title: "Foltyn steal Speeds",
       category: "Shorts",
       type: "vertical",
-      creator: "@YouBrenno",
-      videoUrl: "",
+      creator: "@Foltyn",
+      videoUrl: "https://youtube.com/shorts/ZOmeZnelRmY",
     },
     {
       id: 2,
