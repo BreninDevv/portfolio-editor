@@ -6,11 +6,11 @@ export default function Edits() {
 
   const robloxEdits = [
     {
-      creator: "@StreamerRoblox",
-      title: "Bedwars Clutch",
+      creator: "@Foltyn",
+      title: "Foltyn steal Speeds",
       category: "Shorts",
       type: "vertical",
-      videoUrl: "",
+      videoUrl: "https://youtube.com/shorts/ZOmeZnelRmY",
     },
     {
       creator: "@CriadordeConteudo",
@@ -20,11 +20,11 @@ export default function Edits() {
       videoUrl: "",
     },
     {
-      creator: "@RobloxNews",
-      title: "Brookhaven Story",
+      creator: "@Suetam",
+      title: "Intro Roblox Video",
       category: "Long Form",
       type: "horizontal",
-      videoUrl: "",
+      videoUrl: "https://youtu.be/UifySD1GzYU",
     },
   ];
 
