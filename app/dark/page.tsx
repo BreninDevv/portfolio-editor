@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 // Imports de Imagens
 import YouBrenno from "../favicon.ico";
-import DarkLogo from "../../public/roblox.png";
+import DarkLogo from "../../public/dark.png";
 import Personagem2 from "../../public/personagem2.png";
 import Gmail from "../../public/gmail.webp";
 import Discord from "../../public/discord.jpg";
@@ -14,55 +14,30 @@ import X from "../../public/x.png";
 export default function DarkNichePage() {
   const [showStickyHeader, setShowStickyHeader] = useState(false);
 
-  // Sistema de URLs igual ao IRL/Roblox
   const darkEdits = [
     {
       id: 1,
-      title: "Dark Mystery",
+      title: "Mario Dark",
       category: "Documentary",
-      type: "vertical",
+      type: "horizontal",
       creator: "@YouBrenno",
-      videoUrl: "",
+      videoUrl: "https://youtu.be/TOdj79A6Gaw",
     },
     {
       id: 2,
-      title: "True Crime Case",
+      title: "Games Dark",
       category: "Shorts",
-      type: "vertical",
+      type: "horizontal",
       creator: "@YouBrenno",
-      videoUrl: "",
+      videoUrl: "https://youtu.be/tyzGq5bUQbk",
     },
     {
       id: 3,
-      title: "Deep Web Story",
+      title: "Minecraft Dark",
       category: "Long Form",
       type: "horizontal",
       creator: "@YouBrenno",
-      videoUrl: "",
-    },
-    {
-      id: 4,
-      title: "Unsolved Files",
-      category: "Shorts",
-      type: "vertical",
-      creator: "@YouBrenno",
-      videoUrl: "",
-    },
-    {
-      id: 5,
-      title: "Hidden History",
-      category: "Shorts",
-      type: "vertical",
-      creator: "@YouBrenno",
-      videoUrl: "",
-    },
-    {
-      id: 6,
-      title: "Horror Narrative",
-      category: "Long Form",
-      type: "horizontal",
-      creator: "@YouBrenno",
-      videoUrl: "",
+      videoUrl: "https://youtu.be/Nc-eLLQwJ2c",
     },
   ];
 
@@ -74,7 +49,6 @@ export default function DarkNichePage() {
 
   return (
     <main className="bg-[#121212] font-sans selection:bg-white selection:text-black min-h-screen">
-      {/* --- HEADER CORRIGIDO PARA MOBILE --- */}
       <header
         className={`fixed top-0 z-[100] w-full py-4 px-4 md:px-6 transition-all duration-300 ${showStickyHeader ? "bg-[#181922]/95 backdrop-blur-md border-b-2 border-white/10" : "bg-transparent"}`}
       >
@@ -100,7 +74,6 @@ export default function DarkNichePage() {
             <a href="#edits" className="hover:text-white transition-colors">
               Edits
             </a>
-            {/* Agora visível no Mobile */}
             <a href="#contact" className="hover:text-white transition-colors">
               Contact
             </a>
@@ -108,7 +81,6 @@ export default function DarkNichePage() {
         </div>
       </header>
 
-      {/* --- HERO SECTION --- */}
       <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-4">
         <div
           className="absolute inset-0 z-0 opacity-[0.03]"
@@ -117,7 +89,6 @@ export default function DarkNichePage() {
             backgroundSize: "60px 60px",
           }}
         ></div>
-
         <div className="relative z-10 text-center flex flex-col items-center w-full">
           <div className="relative w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52 bg-white border-[4px] md:border-[6px] border-[#181922] rounded-full overflow-hidden shadow-[8px_8px_0px_0px_#181922] mb-6 md:mb-8 animate-bounce">
             <Image
@@ -137,24 +108,25 @@ export default function DarkNichePage() {
         </div>
       </section>
 
-      {/* --- VIDEOS SECTION --- */}
       <section
         id="edits"
         className="py-16 md:py-24 px-4 md:px-6 max-w-6xl mx-auto"
       >
         <div className="flex items-center gap-3 md:gap-4 mb-12 md:mb-16 border-b-4 md:border-b-8 border-white/10 pb-4 md:pb-6">
+          {/* LOGO DARK PORTFOLIO AJUSTADA */}
           <div className="relative w-12 h-12 md:w-16 md:h-16 bg-white rounded-[1rem] md:rounded-[1.2rem] border-[3px] md:border-4 border-[#181922] shadow-[4px_4px_0px_0px_#181922] overflow-hidden shrink-0">
             <Image
               src={DarkLogo}
               alt="Dark Content"
               fill
-              className="object-cover scale-[1.02]"
+              className="object-cover scale-[1.1]"
             />
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">
             Dark Portfolio
           </h2>
         </div>
+
         <div className="flex justify-center text-white font-bold text-2xl pb-15 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
         </div>
@@ -164,9 +136,21 @@ export default function DarkNichePage() {
             <VideoCard key={item.id} item={item} />
           ))}
         </div>
+
+        <div className="mt-20 flex flex-col items-center gap-8">
+          <p className="text-white/20 font-black uppercase tracking-[0.4em] text-sm md:text-base italic text-center">
+            More videos coming soon
+          </p>
+
+          <a
+            href="/"
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-black uppercase tracking-tighter text-black bg-white border-[3px] border-[#181922] rounded-full shadow-[6px_6px_0px_0px_rgba(255,255,255,0.1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+          >
+            View Full Editing Portfolio
+          </a>
+        </div>
       </section>
 
-      {/* --- CONTACT SECTION - Ajustado para respiro mobile --- */}
       <section
         id="contact"
         className="w-full bg-[#181922] py-20 md:py-32 px-6 flex flex-col items-center justify-center min-h-screen"
@@ -190,9 +174,13 @@ export default function DarkNichePage() {
               className="w-full h-auto scale-[1.02]"
             />
           </div>
-
           <div className="w-full max-w-md flex flex-col gap-5 md:gap-6 font-black uppercase tracking-tighter">
-            <ContactItem icon={Discord} label="Discord" value="@YouBrenno" />
+            <ContactItem
+              icon={Discord}
+              label="Discord"
+              value="@YouBrenno"
+              href="discord.com/users/1449604904082473123"
+            />
             <ContactItem
               icon={X}
               label="X Twitter"
@@ -221,7 +209,6 @@ function VideoCard({ item }: { item: any }) {
     else if (url.includes("v=")) videoId = url.split("v=")[1].split("&")[0];
     else if (url.includes("youtu.be/"))
       videoId = url.split("youtu.be/")[1].split("?")[0];
-
     return videoId
       ? `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0`
       : null;
@@ -279,13 +266,13 @@ function ContactItem({
 }) {
   const content = (
     <div className="group flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-white rounded-[1.5rem] md:rounded-[2rem] border-[3px] md:border-4 border-[#181922] shadow-[6px_6px_0px_0px_#181922] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none cursor-pointer">
-      <div className="w-10 h-10 md:w-12 md:h-12 shrink-0 overflow-hidden rounded-lg md:rounded-xl border border-gray-100">
+      {/* ICONES DE CONTATO AJUSTADOS */}
+      <div className="relative w-10 h-10 md:w-12 md:h-12 shrink-0 overflow-hidden rounded-lg md:rounded-xl border border-gray-100">
         <Image
           src={icon}
           alt={label}
-          width={48}
-          height={48}
-          className="scale-[1.02]"
+          fill
+          className="object-cover scale-[1.1]"
         />
       </div>
       <div className="overflow-hidden">
@@ -298,7 +285,6 @@ function ContactItem({
       </div>
     </div>
   );
-
   return href ? (
     <a href={href} target="_blank" rel="noopener noreferrer" className="w-full">
       {content}

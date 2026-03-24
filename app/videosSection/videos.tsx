@@ -1,5 +1,7 @@
 import Image from "next/image";
 import RobloxLogo from "../../public/roblox.png";
+import Dark from "../../public/dark.png";
+import IRL from "../../public/irl.png";
 
 export default function Edits() {
   // --- DADOS DOS NICHOS ---
@@ -85,7 +87,6 @@ export default function Edits() {
         My Best Edits
       </h2>
 
-      {/* SEÇÃO ROBLOX */}
       <NicheSection title="Roblox" icon={RobloxLogo} viewMoreHref="/roblox">
         <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
@@ -97,8 +98,7 @@ export default function Edits() {
         </div>
       </NicheSection>
 
-      {/* SEÇÃO IRL STREAM */}
-      <NicheSection title="IRL Stream" viewMoreHref="/irl">
+      <NicheSection title="IRL Stream" icon={IRL} viewMoreHref="/irl">
         <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
         </div>
@@ -109,8 +109,7 @@ export default function Edits() {
         </div>
       </NicheSection>
 
-      {/* SEÇÃO DESCONHECIDA */}
-      <NicheSection title="Unknown Niche" viewMoreHref="/dark">
+      <NicheSection title="Dark Niche" icon={Dark} viewMoreHref="/dark">
         <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
         </div>
@@ -141,11 +140,16 @@ function NicheSection({
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b-4 border-[#181922] pb-4 gap-4">
         <div className="flex items-center gap-4">
           {icon && (
-            <div className="w-12 h-12 bg-gray-100 rounded-lg border-2 border-[#181922] flex items-center justify-center overflow-hidden shrink-0">
-              <Image src={icon} alt={`${title} icon`} />
+            <div className="w-12 h-12 bg-gray-100 rounded-lg border-2 border-[#181922] flex items-center justify-center overflow-hidden shrink-0 relative">
+              <Image
+                src={icon}
+                alt={`${title} icon`}
+                fill
+                className="object-cover scale-[1.1]"
+              />
             </div>
           )}
-          <h3 className="text-3xl font-bold text-[#181922] uppercase tracking-tighter">
+          <h3 className="text-3xl font-bold text-[#181922] uppercase tracking-tighter leading-none">
             {title}
           </h3>
         </div>

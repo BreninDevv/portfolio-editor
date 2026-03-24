@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 // Imports de Imagens
 import YouBrenno from "../favicon.ico";
-import IRL_Logo from "../../public/roblox.png";
+import IRL_Logo from "../../public/irl.png";
 import Personagem2 from "../../public/personagem2.png";
 import Gmail from "../../public/gmail.webp";
 import Discord from "../../public/discord.jpg";
@@ -156,17 +156,28 @@ export default function IRLNichePage() {
             IRL Edits
           </h2>
         </div>
-        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-15 text-center">
+        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-15 text-center leading-tight">
           All videos have been edited for technical demonstration purposes ONLY.
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {irlEdits.map((item) => (
             <VideoCard key={item.id} item={item} />
           ))}
         </div>
+
+        {/* --- BOTÃO PARA O HUB --- */}
+        <div className="mt-20 flex justify-center">
+          <a
+            href="/"
+            className="group relative inline-flex items-center justify-center px-10 py-5 font-black uppercase tracking-tighter text-white bg-[#3e4263] border-[3px] border-[#181922] rounded-full shadow-[6px_6px_0px_0px_rgba(30,64,175,0.4)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+          >
+            View Full Editing Portfolio
+          </a>
+        </div>
       </section>
 
-      {/* --- CONTACT SECTION - Ajustado para não ser "engolido" --- */}
+      {/* --- CONTACT SECTION --- */}
       <section
         id="contact"
         className="w-full bg-[#181922] py-20 md:py-32 px-6 flex flex-col items-center justify-center min-h-screen"
@@ -192,23 +203,25 @@ export default function IRLNichePage() {
           </div>
 
           <div className="w-full max-w-md flex flex-col gap-5 md:gap-6 font-black uppercase tracking-tighter">
-            <div className="group flex items-center gap-4 p-5 bg-white rounded-[2rem] border-4 border-[#181922] shadow-[8px_8px_0px_0px_#181922] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none cursor-pointer">
-              <Image
-                src={Discord}
-                alt="Discord"
-                width={48}
-                height={48}
-                className="rounded-xl shrink-0"
-              />
-              <div>
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                  Discord
-                </p>
-                <p className="text-lg md:text-xl font-black text-[#181922]">
-                  @YouBrenno
-                </p>
+            <a href="discord.com/users/1449604904082473123" target="_blank">
+              <div className="group flex items-center gap-4 p-5 bg-white rounded-[2rem] border-4 border-[#181922] shadow-[8px_8px_0px_0px_#181922] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none cursor-pointer">
+                <Image
+                  src={Discord}
+                  alt="Discord"
+                  width={48}
+                  height={48}
+                  className="rounded-xl shrink-0"
+                />
+                <div>
+                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    Discord
+                  </p>
+                  <p className="text-lg md:text-xl font-black text-[#181922]">
+                    @YouBrenno
+                  </p>
+                </div>
               </div>
-            </div>
+            </a>
 
             <a
               href="https://x.com/YouBrenno_edits"
@@ -259,7 +272,6 @@ export default function IRLNichePage() {
   );
 }
 
-// O componente VideoCard permanece o mesmo para garantir o funcionamento dos embeds
 function VideoCard({ item }: { item: any }) {
   const getEmbedUrl = (url: string) => {
     if (!url) return null;

@@ -14,6 +14,7 @@ import X from "../../public/x.png";
 export default function RobloxNichePage() {
   const [showStickyHeader, setShowStickyHeader] = useState(false);
 
+  // Mantido apenas os 3 primeiros vídeos
   const robloxEdits = [
     {
       id: 1,
@@ -25,11 +26,11 @@ export default function RobloxNichePage() {
     },
     {
       id: 2,
-      title: "Blox Fruits PvP",
+      title: "THE NEW DRAGON ☠",
       category: "Shorts",
       type: "vertical",
-      creator: "@YouBrenno",
-      videoUrl: "",
+      creator: "@Foltyn",
+      videoUrl: "https://youtube.com/shorts/pTPQ-OkzzDk",
     },
     {
       id: 3,
@@ -38,30 +39,6 @@ export default function RobloxNichePage() {
       type: "horizontal",
       creator: "@Suetam",
       videoUrl: "https://youtu.be/UifySD1GzYU",
-    },
-    {
-      id: 4,
-      title: "Tower of Hell Run",
-      category: "Shorts",
-      type: "vertical",
-      creator: "@YouBrenno",
-      videoUrl: "",
-    },
-    {
-      id: 5,
-      title: "Adopt Me Trading",
-      category: "Shorts",
-      type: "vertical",
-      creator: "@YouBrenno",
-      videoUrl: "",
-    },
-    {
-      id: 6,
-      title: "Doors Full Gameplay",
-      category: "Long Form",
-      type: "horizontal",
-      creator: "@YouBrenno",
-      videoUrl: "",
     },
   ];
 
@@ -73,7 +50,7 @@ export default function RobloxNichePage() {
 
   return (
     <main className="bg-[#d8b4fe] font-sans selection:bg-[#7e22ce] selection:text-white">
-      {/* --- HEADER CORRIGIDO PARA MOBILE --- */}
+      {/* --- HEADER --- */}
       <header
         className={`fixed top-0 z-[100] w-full py-4 px-4 md:px-6 transition-all duration-300 ${showStickyHeader ? "bg-white/90 backdrop-blur-md border-b-2 border-[#7e22ce]" : "bg-transparent"}`}
       >
@@ -100,7 +77,6 @@ export default function RobloxNichePage() {
             <a href="#edits" className="hover:text-[#7e22ce] transition-colors">
               Edits
             </a>
-            {/* Removido o 'hidden sm:block' para aparecer no Mobile */}
             <a
               href="#contact"
               className="hover:text-[#7e22ce] transition-colors"
@@ -158,13 +134,29 @@ export default function RobloxNichePage() {
             Selected Edits
           </h2>
         </div>
+
         <div className="flex justify-center text-[#181922] font-bold text-2xl pb-15 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {robloxEdits.map((item) => (
             <VideoCard key={item.id} item={item} />
           ))}
+        </div>
+
+        {/* --- RODAPÉ DA SEÇÃO DE VÍDEOS --- */}
+        <div className="mt-20 flex flex-col items-center gap-8">
+          <p className="text-[#7e22ce]/50 font-black uppercase tracking-[0.4em] text-sm md:text-base italic text-center">
+            More videos coming soon
+          </p>
+
+          <a
+            href="/"
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-black uppercase tracking-tighter text-white bg-[#63c9f8] border-[3px] border-[#181922] rounded-full shadow-[6px_6px_0px_0px_rgba(126,34,206,0.4)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+          >
+            View Full Editing Portfolio
+          </a>
         </div>
       </section>
 
@@ -194,7 +186,12 @@ export default function RobloxNichePage() {
           </div>
 
           <div className="w-full max-w-md flex flex-col gap-5 md:gap-6 font-black uppercase tracking-tighter">
-            <ContactItem icon={Discord} label="Discord" value="@YouBrenno" />
+            <ContactItem
+              icon={Discord}
+              label="Discord"
+              value="@YouBrenno"
+              href="discord.com/users/1449604904082473123"
+            />
             <ContactItem
               icon={X}
               label="X Twitter"
