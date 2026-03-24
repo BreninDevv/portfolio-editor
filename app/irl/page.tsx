@@ -203,7 +203,10 @@ export default function IRLNichePage() {
           </div>
 
           <div className="w-full max-w-md flex flex-col gap-5 md:gap-6 font-black uppercase tracking-tighter">
-            <a href="discord.com/users/1449604904082473123" target="_blank">
+            <a
+              href="https://discord.com/users/1449604904082473123"
+              target="_blank"
+            >
               <div className="group flex items-center gap-4 p-5 bg-white rounded-[2rem] border-4 border-[#181922] shadow-[8px_8px_0px_0px_#181922] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none cursor-pointer">
                 <Image
                   src={Discord}

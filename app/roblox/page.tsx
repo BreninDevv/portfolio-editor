@@ -190,7 +190,7 @@ export default function RobloxNichePage() {
               icon={Discord}
               label="Discord"
               value="@YouBrenno"
-              href="discord.com/users/1449604904082473123"
+              href="https://discord.com/users/1449604904082473123"
             />
             <ContactItem
               icon={X}

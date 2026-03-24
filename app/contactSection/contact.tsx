@@ -36,7 +36,7 @@ export default function Contact() {
         {/* BOTÕES DE CONTATO (Direita) */}
         <div className="w-full max-w-md flex flex-col gap-6">
           {/* Discord Button */}
-          <a href="discord.com/users/1449604904082473123">
+          <a href="https://discord.com/users/1449604904082473123">
             <div className="group flex items-center gap-4 p-4 bg-white rounded-2xl border-[3px] border-white shadow-[6px_6px_0px_0px_rgba(88,101,242,0.5)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none cursor-pointer">
               <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center overflow-hidden">
                 <Image src={Discord} alt="Discord logo" />
