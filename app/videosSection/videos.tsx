@@ -13,11 +13,11 @@ export default function Edits() {
       videoUrl: "https://youtube.com/shorts/ZOmeZnelRmY",
     },
     {
-      creator: "@CriadordeConteudo",
-      title: "Blox Fruits PvP",
+      creator: "@Foltyn",
+      title: "THE NEW DRAGON! ☠",
       category: "Shorts",
       type: "vertical",
-      videoUrl: "",
+      videoUrl: "https://youtube.com/shorts/pTPQ-OkzzDk",
     },
     {
       creator: "@Suetam",
@@ -54,25 +54,25 @@ export default function Edits() {
 
   const unknownEdits = [
     {
-      creator: "@CanalX",
-      title: "Cinematic Project 01",
+      creator: "@YouBrenno",
+      title: "Mario Video",
       category: "Long Form",
       type: "horizontal",
-      videoUrl: "",
+      videoUrl: "https://youtu.be/TOdj79A6Gaw",
     },
     {
-      creator: "@CanalY",
-      title: "Cinematic Project 02",
+      creator: "@YouBrenno",
+      title: "Games Video",
       category: "Long Form",
       type: "horizontal",
-      videoUrl: "",
+      videoUrl: "https://youtu.be/tyzGq5bUQbk",
     },
     {
-      creator: "@CanalZ",
-      title: "Cinematic Project 03",
+      creator: "@YouBrenno",
+      title: "Minecraft Video",
       category: "Long Form",
       type: "horizontal",
-      videoUrl: "",
+      videoUrl: "https://youtu.be/Nc-eLLQwJ2c",
     },
   ];
 
