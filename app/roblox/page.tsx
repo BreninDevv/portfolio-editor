@@ -14,10 +14,11 @@ import X from "../../public/x.png";
 export default function RobloxNichePage() {
   const [showStickyHeader, setShowStickyHeader] = useState(false);
 
-  // Mantido apenas os 3 primeiros vídeos
+  // Adicionado 'slug' único para evitar erro de ID repetido no React
   const robloxEdits = [
     {
-      id: 1,
+      slug: "edit-foltyn-1",
+      id: "@Foltyn",
       title: "Foltyn steal Speeds",
       category: "Shorts",
       type: "vertical",
@@ -25,7 +26,8 @@ export default function RobloxNichePage() {
       videoUrl: "https://youtube.com/shorts/ZOmeZnelRmY",
     },
     {
-      id: 2,
+      slug: "edit-foltyn-2",
+      id: "@Foltyn",
       title: "THE NEW DRAGON ☠",
       category: "Shorts",
       type: "vertical",
@@ -33,7 +35,8 @@ export default function RobloxNichePage() {
       videoUrl: "https://youtube.com/shorts/pTPQ-OkzzDk",
     },
     {
-      id: 3,
+      slug: "edit-suetam-1",
+      id: "@Suetam (Susu)",
       title: "Intro Roblox Video",
       category: "Long Form",
       type: "horizontal",
@@ -52,7 +55,11 @@ export default function RobloxNichePage() {
     <main className="bg-[#d8b4fe] font-sans selection:bg-[#7e22ce] selection:text-white">
       {/* --- HEADER --- */}
       <header
-        className={`fixed top-0 z-[100] w-full py-4 px-4 md:px-6 transition-all duration-300 ${showStickyHeader ? "bg-white/90 backdrop-blur-md border-b-2 border-[#7e22ce]" : "bg-transparent"}`}
+        className={`fixed top-0 z-[100] w-full py-4 px-4 md:px-6 transition-all duration-300 ${
+          showStickyHeader
+            ? "bg-white/90 backdrop-blur-md border-b-2 border-[#7e22ce]"
+            : "bg-transparent"
+        }`}
       >
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -135,13 +142,13 @@ export default function RobloxNichePage() {
           </h2>
         </div>
 
-        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-15 text-center">
+        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-16 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {robloxEdits.map((item) => (
-            <VideoCard key={item.id} item={item} />
+            <VideoCard key={item.slug} item={item} />
           ))}
         </div>
 
@@ -230,8 +237,11 @@ function VideoCard({ item }: { item: any }) {
 
   return (
     <div className="group flex flex-col gap-4">
+      {/* VÍDEO NO TOPO */}
       <div
-        className={`relative w-full bg-white border-[3px] md:border-4 border-[#181922] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-[8px_8px_0px_0px_#181922] md:shadow-[12px_12px_0px_0px_#181922] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none ${item.type === "vertical" ? "aspect-[9/16]" : "aspect-video"}`}
+        className={`relative w-full bg-white border-[3px] md:border-4 border-[#181922] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-[8px_8px_0px_0px_#181922] md:shadow-[12px_12px_0px_0px_#181922] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none ${
+          item.type === "vertical" ? "aspect-[9/16]" : "aspect-video"
+        }`}
       >
         {embedUrl ? (
           <iframe
@@ -253,12 +263,14 @@ function VideoCard({ item }: { item: any }) {
           {item.category}
         </div>
       </div>
-      <div className="mt-4 md:mt-8 px-2">
+
+      {/* TEXTOS EMBAIXO NA ORDEM CERTA */}
+      <div className="mt-4 md:mt-6 px-2">
         <h3 className="text-2xl md:text-3xl font-black text-[#181922] uppercase tracking-tighter leading-tight">
           {item.title}
         </h3>
         <p className="text-[10px] md:text-xs font-black text-[#7e22ce] uppercase tracking-widest mt-1 italic">
-          Project RBX-00{item.id}
+          {item.id}
         </p>
       </div>
     </div>
