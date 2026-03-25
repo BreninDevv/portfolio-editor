@@ -246,7 +246,7 @@ function VideoCard({ item }: { item: any }) {
           {item.title}
         </h3>
         <p className="text-[10px] md:text-xs font-black text-white/30 uppercase tracking-widest mt-1 italic">
-          Project DRK-00{item.id}
+          Project DARK-00{item.id}
         </p>
       </div>
     </div>
