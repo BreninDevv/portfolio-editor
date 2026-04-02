@@ -5,7 +5,6 @@ import IRL from "../../public/irl.png";
 
 export default function Edits() {
   // --- DADOS DOS NICHOS ---
-
   const robloxEdits = [
     {
       creator: "@Foltyn",
@@ -81,7 +80,8 @@ export default function Edits() {
   return (
     <section
       id="edits"
-      className="w-full bg-white py-16 px-6 flex flex-col items-center"
+      /* FUNDO ATUALIZADO: Pontos mais visíveis (2px) e mais densos (24px) */
+      className="w-full bg-white bg-[radial-gradient(#d1d5db_2px,transparent_2px)] [background-size:24px_24px] py-16 px-6 flex flex-col items-center"
     >
       <h2 className="text-4xl font-bold text-[#181922] mb-16 text-center uppercase tracking-tighter">
         My Best Edits
