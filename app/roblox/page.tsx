@@ -17,6 +17,33 @@ export default function RobloxNichePage() {
   // Adicionado 'slug' único para evitar erro de ID repetido no React
   const robloxEdits = [
     {
+      slug: "edit-ryan-1",
+      id: "@RyanRbx",
+      title: "Steal Brainrots 🔥",
+      category: "Long Form",
+      type: "horizontal",
+      creator: "@RyanRbx",
+      videoUrl: "https://www.youtube.com/watch?v=6oE04A3ISq4&t=217s",
+    },
+    {
+      slug: "edit-suetam-1",
+      id: "@Suetam (Susu)",
+      title: "Intro Roblox Video",
+      category: "Long Form",
+      type: "horizontal",
+      creator: "@Suetam",
+      videoUrl: "https://youtu.be/UifySD1GzYU",
+    },
+    {
+      slug: "edit-Newski-1",
+      id: "@Newski",
+      title: "Swing Brainrots",
+      category: "Long Form",
+      type: "horizontal",
+      creator: "@Newski",
+      videoUrl: "https://www.youtube.com/watch?v=VaZQr27A_6E&t=10s",
+    },
+    {
       slug: "edit-foltyn-1",
       id: "@Foltyn",
       title: "Foltyn steal Speeds",
@@ -35,13 +62,13 @@ export default function RobloxNichePage() {
       videoUrl: "https://youtube.com/shorts/pTPQ-OkzzDk",
     },
     {
-      slug: "edit-suetam-1",
-      id: "@Suetam (Susu)",
-      title: "Intro Roblox Video",
-      category: "Long Form",
-      type: "horizontal",
-      creator: "@Suetam",
-      videoUrl: "https://youtu.be/UifySD1GzYU",
+      slug: "edit-caylus-1",
+      id: "@Caylus",
+      title: "Caylus Aura ☠",
+      category: "Shorts",
+      type: "vertical",
+      creator: "@Caylus",
+      videoUrl: "https://youtube.com/shorts/UaO3Sh-25iw",
     },
   ];
 

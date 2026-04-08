@@ -21,11 +21,11 @@ export default function Edits() {
       videoUrl: "https://youtube.com/shorts/pTPQ-OkzzDk",
     },
     {
-      creator: "@Suetam",
-      title: "Intro Roblox Video",
-      category: "Long Form",
-      type: "horizontal",
-      videoUrl: "https://youtu.be/UifySD1GzYU",
+      creator: "@Caylus",
+      title: "Caylus Aura ☠",
+      category: "Shorts",
+      type: "vertical",
+      videoUrl: "https://youtube.com/shorts/UaO3Sh-25iw",
     },
   ];
 
@@ -80,8 +80,8 @@ export default function Edits() {
   return (
     <section
       id="edits"
-      /* FUNDO ATUALIZADO: Pontos mais visíveis (2px) e mais densos (24px) */
-      className="w-full bg-white bg-[radial-gradient(#d1d5db_2px,transparent_2px)] [background-size:24px_24px] py-16 px-6 flex flex-col items-center"
+      /* FUNDO: Branco com bolinhas azul claro bem suaves (sky-400 com 0.2 de opacidade) */
+      className="w-full bg-white bg-[radial-gradient(rgba(56,189,248,0.2)_2px,transparent_2px)] [background-size:24px_24px] py-16 px-6 flex flex-col items-center"
     >
       <h2 className="text-4xl font-bold text-[#181922] mb-16 text-center uppercase tracking-tighter">
         My Best Edits
@@ -235,7 +235,7 @@ function VideoCard({ item }: { item: any }) {
         <h4 className="text-2xl font-bold text-[#181922] leading-tight line-clamp-1">
           {item.title}
         </h4>
-        <p className="text-xs font-sans text-gray-500 font-bold uppercase tracking-widest mt-1">
+        <p className="text-xs font-sans text-gray-600 font-bold uppercase tracking-widest mt-1">
           {item.creator}
         </p>
       </div>
