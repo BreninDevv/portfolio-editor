@@ -1,7 +1,7 @@
 import Image from "next/image";
 import RobloxLogo from "../../public/roblox.png";
-import YT from "../../public/yt.png";
 import Twitch from "../../public/twitch.png";
+import Minecraft from "../../public/minecraft.jpg";
 
 export default function Niches() {
   const nicheData = [
@@ -13,15 +13,15 @@ export default function Niches() {
     },
     {
       id: 2,
-      title: "IRL Stream",
-      slogan: "I turn IRL stream moments into highlights.",
-      icon: Twitch,
+      title: "Minecraft",
+      slogan: "High-quality videos with replay mod",
+      icon: Minecraft,
     },
     {
       id: 3,
-      title: "Dark Channels",
-      slogan: "Mysterious narratives with compelling visual styles.",
-      icon: YT,
+      title: "IRL Stream",
+      slogan: "I turn IRL stream moments into highlights.",
+      icon: Twitch,
     },
   ];
 

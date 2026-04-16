@@ -2,6 +2,7 @@ import Image from "next/image";
 import RobloxLogo from "../../public/roblox.png";
 import Dark from "../../public/dark.png";
 import IRL from "../../public/irl.png";
+import Minecraft from "../../public/minecraft.jpg";
 
 export default function Edits() {
   // --- DADOS DOS NICHOS ---
@@ -56,24 +57,24 @@ export default function Edits() {
   const unknownEdits = [
     {
       creator: "@YouBrenno",
-      title: "Mario Video",
-      category: "Long Form",
-      type: "horizontal",
-      videoUrl: "https://youtu.be/TOdj79A6Gaw",
+      title: "Short Minecraft",
+      category: "Shorts",
+      type: "vertical",
+      videoUrl: "",
     },
     {
       creator: "@YouBrenno",
-      title: "Games Video",
-      category: "Long Form",
-      type: "horizontal",
-      videoUrl: "https://youtu.be/tyzGq5bUQbk",
+      title: "Short Minecraft",
+      category: "Shorts",
+      type: "vertical",
+      videoUrl: "",
     },
     {
       creator: "@YouBrenno",
-      title: "Minecraft Video",
-      category: "Long Form",
-      type: "horizontal",
-      videoUrl: "https://youtu.be/Nc-eLLQwJ2c",
+      title: "Short Minecraft",
+      category: "Shorts",
+      type: "vertical",
+      videoUrl: "",
     },
   ];
 
@@ -87,6 +88,7 @@ export default function Edits() {
         My Best Edits
       </h2>
 
+      {/* 1. SEÇÃO ROBLOX */}
       <NicheSection title="Roblox" icon={RobloxLogo} viewMoreHref="/roblox">
         <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
@@ -98,23 +100,29 @@ export default function Edits() {
         </div>
       </NicheSection>
 
+      {/* 2. SEÇÃO MINECRAFT */}
+      <NicheSection
+        title="Minecraft"
+        icon={Minecraft}
+        viewMoreHref="/minecraft"
+      >
+        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
+          All videos have been edited for technical demonstration purposes ONLY.
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+          {unknownEdits.map((item, index) => (
+            <VideoCard key={index} item={item} />
+          ))}
+        </div>
+      </NicheSection>
+
+      {/* 3. SEÇÃO IRL STREAM (Agora por último) */}
       <NicheSection title="IRL Stream" icon={IRL} viewMoreHref="/irl">
         <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
           {irlEdits.map((item, index) => (
-            <VideoCard key={index} item={item} />
-          ))}
-        </div>
-      </NicheSection>
-
-      <NicheSection title="Dark Niche" icon={Dark} viewMoreHref="/dark">
-        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
-          All videos have been edited for technical demonstration purposes ONLY.
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-          {unknownEdits.map((item, index) => (
             <VideoCard key={index} item={item} />
           ))}
         </div>

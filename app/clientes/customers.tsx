@@ -11,13 +11,6 @@ export default function Customers() {
       channelUrl: "https://youtube.com/@RyanRbx",
       imageScale: 105, // 105% de zoom
     },
-    {
-      name: "Newski",
-      subscribers: "71K",
-      imageUrl: Newski,
-      channelUrl: "https://www.youtube.com/@newskibruh",
-      imageScale: 120, // Mais zoom para esse avatar específico
-    },
   ];
 
   return (
