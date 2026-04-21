@@ -54,34 +54,34 @@ export default function Edits() {
     },
   ];
 
-  const unknownEdits = [
+  // ATUALIZADO: Agora com seus vídeos de Minecraft
+  const minecraftEdits = [
     {
       creator: "@YouBrenno",
-      title: "Short Minecraft",
+      title: "Minecraft Edit",
       category: "Shorts",
       type: "vertical",
-      videoUrl: "",
+      videoUrl: "https://www.youtube.com/watch?v=VIzmj5Cce5A",
     },
     {
       creator: "@YouBrenno",
-      title: "Short Minecraft",
+      title: "Admin testing me...",
       category: "Shorts",
       type: "vertical",
-      videoUrl: "",
+      videoUrl: "https://www.youtube.com/watch?v=EqBoHQALr-g",
     },
     {
       creator: "@YouBrenno",
-      title: "Short Minecraft",
+      title: "Minecraft mysterious",
       category: "Shorts",
       type: "vertical",
-      videoUrl: "",
+      videoUrl: "https://www.youtube.com/watch?v=yyzfZh7Vcio",
     },
   ];
 
   return (
     <section
       id="edits"
-      /* FUNDO: Branco com bolinhas azul claro bem suaves (sky-400 com 0.2 de opacidade) */
       className="w-full bg-white bg-[radial-gradient(rgba(56,189,248,0.2)_2px,transparent_2px)] [background-size:24px_24px] py-16 px-6 flex flex-col items-center"
     >
       <h2 className="text-4xl font-bold text-[#181922] mb-16 text-center uppercase tracking-tighter">
@@ -100,7 +100,7 @@ export default function Edits() {
         </div>
       </NicheSection>
 
-      {/* 2. SEÇÃO MINECRAFT */}
+      {/* 2. SEÇÃO MINECRAFT - AGORA COM OS VÍDEOS CERTOS */}
       <NicheSection
         title="Minecraft"
         icon={Minecraft}
@@ -110,13 +110,13 @@ export default function Edits() {
           All videos have been edited for technical demonstration purposes ONLY.
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-          {unknownEdits.map((item, index) => (
+          {minecraftEdits.map((item, index) => (
             <VideoCard key={index} item={item} />
           ))}
         </div>
       </NicheSection>
 
-      {/* 3. SEÇÃO IRL STREAM (Agora por último) */}
+      {/* 3. SEÇÃO IRL STREAM */}
       <NicheSection title="IRL Stream" icon={IRL} viewMoreHref="/irl">
         <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
@@ -229,7 +229,7 @@ function VideoCard({ item }: { item: any }) {
             style={{ border: 0 }}
           ></iframe>
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-gray-400 font-sans italic p-6 text-center text-sm">
+          <div className="w-full h-full flex items-center justify-center bg-[#1e2029] text-gray-400 font-sans italic p-6 text-center text-sm">
             {item.title} <br /> (Video URL not set)
           </div>
         )}
