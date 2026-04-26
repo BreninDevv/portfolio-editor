@@ -17,10 +17,11 @@ export default function MinecraftNichePage() {
   // --- DADOS ATUALIZADOS COM SEUS LINKS ---
   const longVideo = {
     id: 1,
-    title: "Project Name Here",
+    title: "Mongo Lucky Race!",
     category: "Long Form",
     type: "horizontal",
-    videoUrl: "", 
+    videoUrl: "https://youtu.be/OVfPHesrALc",
+    handle: "@Mongo", // Alterado para @Mongo
   };
 
   const shortEdits = [
@@ -31,6 +32,7 @@ export default function MinecraftNichePage() {
       type: "vertical",
       // Convertendo link para formato de embed
       embedUrl: "https://www.youtube.com/embed/VIzmj5Cce5A",
+      handle: "@YouBrenno",
     },
     {
       id: 3,
@@ -38,6 +40,7 @@ export default function MinecraftNichePage() {
       category: "Shorts",
       type: "vertical",
       embedUrl: "https://www.youtube.com/embed/EqBoHQALr-g",
+      handle: "@YouBrenno",
     },
     {
       id: 4,
@@ -45,6 +48,7 @@ export default function MinecraftNichePage() {
       category: "Shorts",
       type: "vertical",
       embedUrl: "https://www.youtube.com/embed/yyzfZh7Vcio",
+      handle: "@YouBrenno",
     },
   ];
 
@@ -66,45 +70,85 @@ export default function MinecraftNichePage() {
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#181922]/20">
-              <Image src={YouBrenno} alt="Logo" width={32} height={32} className="object-cover" />
+              <Image
+                src={YouBrenno}
+                alt="Logo"
+                width={32}
+                height={32}
+                className="object-cover"
+              />
             </div>
             <span className="font-black text-[#181922] uppercase text-xs md:text-sm tracking-tighter">
               YouBrenno
             </span>
           </div>
           <nav className="flex gap-4 md:gap-6 font-black text-[#181922]/50 uppercase text-[10px] md:text-xs tracking-widest">
-            <a href="/" className="hover:text-green-600 transition-colors">Hub</a>
-            <a href="#edits" className="hover:text-green-600 transition-colors">Edits</a>
-            <a href="#contact" className="hover:text-green-600 transition-colors">Contact</a>
+            <a href="/" className="hover:text-green-600 transition-colors">
+              Hub
+            </a>
+            <a href="#edits" className="hover:text-green-600 transition-colors">
+              Edits
+            </a>
+            <a
+              href="#contact"
+              className="hover:text-green-600 transition-colors"
+            >
+              Contact
+            </a>
           </nav>
         </div>
       </header>
 
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-4">
-        <div className="absolute inset-0 z-0 opacity-[0.05]" style={{ backgroundImage: `linear-gradient(#166534 1px, transparent 1px), linear-gradient(90deg, #166534 1px, transparent 1px)`, backgroundSize: "60px 60px" }}></div>
+        <div
+          className="absolute inset-0 z-0 opacity-[0.05]"
+          style={{
+            backgroundImage: `linear-gradient(#166534 1px, transparent 1px), linear-gradient(90deg, #166534 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        ></div>
         <div className="relative z-10 text-center flex flex-col items-center w-full">
           <div className="relative w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52 bg-white border-[4px] md:border-[6px] border-[#181922] rounded-full overflow-hidden shadow-[8px_8px_0px_0px_#22c55e] mb-6 md:mb-8 animate-bounce">
-            <Image src={YouBrenno} alt="YouBrenno" fill className="object-cover" priority />
+            <Image
+              src={YouBrenno}
+              alt="YouBrenno"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-[#181922] uppercase tracking-tighter mb-2 leading-none">YOUBRENNO</h1>
-          <p className="text-green-700 font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] sm:text-xs md:text-sm">Professional Minecraft Content Editor</p>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-[#181922] uppercase tracking-tighter mb-2 leading-none">
+            YOUBRENNO
+          </h1>
+          <p className="text-green-700 font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] sm:text-xs md:text-sm">
+            Professional Minecraft Content Editor
+          </p>
         </div>
       </section>
 
       {/* Edits Section */}
-      <section id="edits" className="py-16 md:py-24 px-4 md:px-6 max-w-6xl mx-auto flex flex-col items-center">
+      <section
+        id="edits"
+        className="py-16 md:py-24 px-4 md:px-6 max-w-6xl mx-auto flex flex-col items-center"
+      >
         <div className="w-full flex items-center gap-3 md:gap-4 mb-12 md:mb-16 border-b-4 md:border-b-8 border-[#181922]/10 pb-4 md:pb-6">
           <div className="relative w-12 h-12 md:w-16 md:h-16 bg-white rounded-[1rem] md:rounded-[1.2rem] border-[3px] md:border-4 border-[#181922] shadow-[4px_4px_0px_0px_#22c55e] overflow-hidden shrink-0">
-            <Image src={MinecraftLogo} alt="Minecraft" fill className="object-cover scale-[1.1]" />
+            <Image
+              src={MinecraftLogo}
+              alt="Minecraft"
+              fill
+              className="object-cover scale-[1.1]"
+            />
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-[#181922] uppercase tracking-tighter">Minecraft</h2>
+          <h2 className="text-3xl md:text-5xl font-black text-[#181922] uppercase tracking-tighter">
+            Minecraft
+          </h2>
         </div>
 
         <div className="w-full flex flex-col gap-12 md:gap-16">
-          {/* Se não houver URL para o vídeo longo, ele continua como slot vazio */}
           <VideoCard item={longVideo} greenShadow />
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             {shortEdits.map((item) => (
               <VideoCard key={item.id} item={item} greenShadow />
@@ -114,19 +158,47 @@ export default function MinecraftNichePage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="w-full bg-[#181922] py-20 md:py-32 px-6 flex flex-col items-center justify-center">
+      <section
+        id="contact"
+        className="w-full bg-[#181922] py-20 md:py-32 px-6 flex flex-col items-center justify-center"
+      >
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-5xl md:text-7xl font-black text-white mb-4 uppercase tracking-tighter italic">Work with me</h2>
-          <p className="text-white/30 font-black uppercase tracking-[0.3em] text-xs">Available for Minecraft YouTube Channels</p>
+          <h2 className="text-5xl md:text-7xl font-black text-white mb-4 uppercase tracking-tighter italic">
+            Work with me
+          </h2>
+          <p className="text-white/30 font-black uppercase tracking-[0.3em] text-xs">
+            Available for Minecraft YouTube Channels
+          </p>
         </div>
         <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
           <div className="hidden md:block w-full border-4 border-white/10 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden max-w-[400px]">
-            <Image src={Personagem2} alt="Breno" width={600} height={600} className="w-full h-auto" />
+            <Image
+              src={Personagem2}
+              alt="Breno"
+              width={600}
+              height={600}
+              className="w-full h-auto"
+            />
           </div>
           <div className="w-full max-w-md flex flex-col gap-5 md:gap-6 font-black uppercase tracking-tighter">
-            <ContactItem icon={Discord} label="Discord" value="@YouBrenno" href="https://discord.com/users/1449604904082473123" />
-            <ContactItem icon={X} label="X Twitter" value="@YouBrenno_edits" href="https://x.com/YouBrenno_edits" />
-            <ContactItem icon={Gmail} label="E-mail" value="ybrenno.contact@gmail.com" href="mailto:ybrenno.contact@gmail.com" />
+            <ContactItem
+              icon={Discord}
+              label="Discord"
+              value="@YouBrenno"
+              href="https://discord.com/users/1449604904082473123"
+            />
+            <ContactItem
+              icon={X}
+              label="X Twitter"
+              value="@YouBrenno_edits"
+              href="https://x.com/YouBrenno_edits"
+            />
+            <ContactItem
+              icon={Gmail}
+              label="E-mail"
+              value="ybrenno.contact@gmail.com"
+              href="mailto:ybrenno.contact@gmail.com"
+            />
           </div>
         </div>
       </section>
@@ -134,7 +206,13 @@ export default function MinecraftNichePage() {
   );
 }
 
-function VideoCard({ item, greenShadow = false }: { item: any; greenShadow?: boolean }) {
+function VideoCard({
+  item,
+  greenShadow = false,
+}: {
+  item: any;
+  greenShadow?: boolean;
+}) {
   const shadowColor = greenShadow ? "#22c55e" : "#181922";
 
   return (
@@ -155,7 +233,9 @@ function VideoCard({ item, greenShadow = false }: { item: any; greenShadow?: boo
           ></iframe>
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-[#1e2029]">
-             <span className="text-white/20 font-black uppercase text-xs tracking-[0.2em]">Video Slot</span>
+            <span className="text-white/20 font-black uppercase text-xs tracking-[0.2em]">
+              Video Slot
+            </span>
           </div>
         )}
 
@@ -164,24 +244,46 @@ function VideoCard({ item, greenShadow = false }: { item: any; greenShadow?: boo
         </div>
       </div>
       <div className="px-2">
-        <h3 className="text-2xl font-black text-[#181922] uppercase tracking-tighter leading-tight">{item.title}</h3>
-        <p className="text-[13px] font-black text-green-700/50 uppercase mt-1 italic">@YouBrenno</p>
+        <h3 className="text-2xl font-black text-[#181922] uppercase tracking-tighter leading-tight">
+          {item.title}
+        </h3>
+        <p className="text-[13px] font-black text-green-700/50 uppercase mt-1 italic">
+          {item.handle}
+        </p>
       </div>
     </div>
   );
 }
 
-function ContactItem({ icon, label, value, href }: { icon: any; label: string; value: string; href?: string }) {
+function ContactItem({
+  icon,
+  label,
+  value,
+  href,
+}: {
+  icon: any;
+  label: string;
+  value: string;
+  href?: string;
+}) {
   const content = (
     <div className="group flex items-center gap-3 p-4 bg-white rounded-[1.5rem] border-[3px] border-[#181922] shadow-[6px_6px_0px_0px_#22c55e] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none cursor-pointer">
       <div className="relative w-10 h-10 shrink-0 overflow-hidden rounded-lg border border-gray-100">
         <Image src={icon} alt={label} fill className="object-cover" />
       </div>
       <div className="overflow-hidden">
-        <p className="text-[8px] text-gray-400 uppercase tracking-widest">{label}</p>
+        <p className="text-[8px] text-gray-400 uppercase tracking-widest">
+          {label}
+        </p>
         <p className="text-base text-[#181922] truncate font-black">{value}</p>
       </div>
     </div>
   );
-  return href ? <a href={href} target="_blank" rel="noopener noreferrer" className="w-full">{content}</a> : content;
+  return href ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="w-full">
+      {content}
+    </a>
+  ) : (
+    content
+  );
 }
