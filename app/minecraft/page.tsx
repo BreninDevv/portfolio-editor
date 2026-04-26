@@ -20,8 +20,9 @@ export default function MinecraftNichePage() {
     title: "Mongo Lucky Race!",
     category: "Long Form",
     type: "horizontal",
-    videoUrl: "https://www.youtube.com/watch?v=OVfPHesrALc",
-    handle: "@Mongo", // Alterado para @Mongo
+    // CORREÇÃO: Alterado de videoUrl para embedUrl e ajustado o link para formato de embed
+    embedUrl: "https://www.youtube.com/embed/OVfPHesrALc", 
+    handle: "@Mongo",
   };
 
   const shortEdits = [
@@ -30,7 +31,6 @@ export default function MinecraftNichePage() {
       title: "Minecraft Edit",
       category: "Shorts",
       type: "vertical",
-      // Convertendo link para formato de embed
       embedUrl: "https://www.youtube.com/embed/VIzmj5Cce5A",
       handle: "@YouBrenno",
     },
