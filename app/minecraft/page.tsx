@@ -20,7 +20,7 @@ export default function MinecraftNichePage() {
     title: "Mongo Lucky Race!",
     category: "Long Form",
     type: "horizontal",
-    videoUrl: "https://youtu.be/OVfPHesrALc",
+    videoUrl: "https://www.youtube.com/watch?v=OVfPHesrALc",
     handle: "@Mongo", // Alterado para @Mongo
   };
 
