@@ -21,7 +21,7 @@ export default function MinecraftNichePage() {
     category: "Long Form",
     type: "horizontal",
     // CORREÇÃO: Alterado de videoUrl para embedUrl e ajustado o link para formato de embed
-    embedUrl: "https://www.youtube.com/embed/OVfPHesrALc", 
+    embedUrl: "https://www.youtube.com/embed/OVfPHesrALc",
     handle: "@Mongo",
   };
 
@@ -154,6 +154,19 @@ export default function MinecraftNichePage() {
               <VideoCard key={item.id} item={item} greenShadow />
             ))}
           </div>
+        </div>
+
+        <div className="mt-20 flex flex-col items-center gap-8">
+          <p className="text-green-700/60 font-black uppercase tracking-[0.4em] text-sm md:text-base italic text-center">
+            More videos coming soon
+          </p>
+
+          <a
+            href="/"
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-black uppercase tracking-tighter text-white bg-[#63c9f8] border-[3px] border-[#181922] rounded-full shadow-[6px_6px_0px_0px_rgba(12,34,2,0.4)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+          >
+            View Full Editing Portfolio
+          </a>
         </div>
       </section>
 

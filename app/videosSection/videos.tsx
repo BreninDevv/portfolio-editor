@@ -6,6 +6,15 @@ import Minecraft from "../../public/minecraft.jpg";
 
 export default function Edits() {
   // --- DADOS DOS NICHOS ---
+
+  const robloxLongVideo = {
+    creator: "@Dash",
+    title: "Roblox Rivals 👑",
+    category: "Long Form",
+    type: "horizontal",
+    videoUrl: "https://www.youtube.com/watch?v=C4hA6atv5hk",
+  };
+
   const robloxEdits = [
     {
       creator: "@Foltyn",
@@ -54,7 +63,14 @@ export default function Edits() {
     },
   ];
 
-  // ATUALIZADO: Agora com seus vídeos de Minecraft
+  const minecraftLongVideo = {
+    creator: "@Mongo",
+    title: "MONGO LUCKY RACE!",
+    category: "Long Form",
+    type: "horizontal",
+    videoUrl: "https://www.youtube.com/embed/OVfPHesrALc",
+  };
+
   const minecraftEdits = [
     {
       creator: "@YouBrenno",
@@ -93,14 +109,20 @@ export default function Edits() {
         <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-          {robloxEdits.map((item, index) => (
-            <VideoCard key={index} item={item} />
-          ))}
+
+        <div className="flex flex-col gap-10">
+          <div className="w-full">
+            <VideoCard item={robloxLongVideo} />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+            {robloxEdits.map((item, index) => (
+              <VideoCard key={index} item={item} />
+            ))}
+          </div>
         </div>
       </NicheSection>
 
-      {/* 2. SEÇÃO MINECRAFT - AGORA COM OS VÍDEOS CERTOS */}
+      {/* 2. SEÇÃO MINECRAFT */}
       <NicheSection
         title="Minecraft"
         icon={Minecraft}
@@ -109,10 +131,16 @@ export default function Edits() {
         <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
           All videos have been edited for technical demonstration purposes ONLY.
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-          {minecraftEdits.map((item, index) => (
-            <VideoCard key={index} item={item} />
-          ))}
+
+        <div className="flex flex-col gap-10">
+          <div className="w-full">
+            <VideoCard item={minecraftLongVideo} />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+            {minecraftEdits.map((item, index) => (
+              <VideoCard key={index} item={item} />
+            ))}
+          </div>
         </div>
       </NicheSection>
 
@@ -131,7 +159,6 @@ export default function Edits() {
   );
 }
 
-// --- SUB-COMPONENTE: SEÇÃO DE NICHO ---
 function NicheSection({
   title,
   icon,
@@ -191,10 +218,13 @@ function NicheSection({
   );
 }
 
-// --- SUB-COMPONENTE: CARD DE VÍDEO ---
 function VideoCard({ item }: { item: any }) {
   const getEmbedUrl = (url: string) => {
     if (!url) return null;
+
+    // Se o link já for um link de embed, retorna ele mesmo
+    if (url.includes("youtube.com/embed/")) return url;
+
     let videoId = "";
     if (url.includes("shorts/"))
       videoId = url.split("shorts/")[1].split("?")[0];

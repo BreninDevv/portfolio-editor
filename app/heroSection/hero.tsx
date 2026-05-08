@@ -181,13 +181,6 @@ export default function Hero() {
             height={70}
             className="w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 hover:scale-115 duration-300 object-contain cursor-pointer"
           />
-          <Image
-            src={DaVinci}
-            alt="DaVinci"
-            width={70}
-            height={70}
-            className="w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 hover:scale-115 duration-300 object-contain cursor-pointer"
-          />
         </div>
 
         {/* Descrição Curta */}

@@ -14,15 +14,21 @@ import X from "../../public/x.png";
 export default function RobloxNichePage() {
   const [showStickyHeader, setShowStickyHeader] = useState(false);
 
-  // Adicionado 'slug' único para evitar erro de ID repetido no React
   const robloxEdits = [
+    {
+      slug: "edit-rivals",
+      id: "@DASH",
+      title: "Roblox Rivals 👑",
+      category: "Long Form",
+      type: "horizontal",
+      videoUrl: "https://www.youtube.com/watch?v=C4hA6atv5hk", // <--- Preencha aqui a URL do destaque
+    },
     {
       slug: "edit-ryan-1",
       id: "@RyanRbx",
       title: "Steal Brainrots 🔥",
       category: "Long Form",
       type: "horizontal",
-      creator: "@RyanRbx",
       videoUrl: "https://www.youtube.com/watch?v=6oE04A3ISq4&t=217s",
     },
     {
@@ -31,7 +37,6 @@ export default function RobloxNichePage() {
       title: "Intro Roblox Video",
       category: "Long Form",
       type: "horizontal",
-      creator: "@Suetam",
       videoUrl: "https://youtu.be/UifySD1GzYU",
     },
     {
@@ -40,7 +45,6 @@ export default function RobloxNichePage() {
       title: "Swing Brainrots",
       category: "Long Form",
       type: "horizontal",
-      creator: "@Newski",
       videoUrl: "https://www.youtube.com/watch?v=VaZQr27A_6E&t=10s",
     },
     {
@@ -49,7 +53,6 @@ export default function RobloxNichePage() {
       title: "Foltyn steal Speeds",
       category: "Shorts",
       type: "vertical",
-      creator: "@Foltyn",
       videoUrl: "https://youtube.com/shorts/ZOmeZnelRmY",
     },
     {
@@ -58,7 +61,6 @@ export default function RobloxNichePage() {
       title: "THE NEW DRAGON ☠",
       category: "Shorts",
       type: "vertical",
-      creator: "@Foltyn",
       videoUrl: "https://youtube.com/shorts/pTPQ-OkzzDk",
     },
     {
@@ -67,7 +69,6 @@ export default function RobloxNichePage() {
       title: "Caylus Aura ☠",
       category: "Shorts",
       type: "vertical",
-      creator: "@Caylus",
       videoUrl: "https://youtube.com/shorts/UaO3Sh-25iw",
     },
   ];
@@ -174,17 +175,18 @@ export default function RobloxNichePage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-          {robloxEdits.map((item) => (
-            <VideoCard key={item.slug} item={item} />
+          {robloxEdits.map((item, index) => (
+            <div key={item.slug} className={index === 0 ? "lg:col-span-3" : ""}>
+              <VideoCard item={item} />
+            </div>
           ))}
         </div>
 
-        {/* --- RODAPÉ DA SEÇÃO DE VÍDEOS --- */}
+        {/* --- RODAPÉ DA SEÇÃO --- */}
         <div className="mt-20 flex flex-col items-center gap-8">
           <p className="text-[#7e22ce]/50 font-black uppercase tracking-[0.4em] text-sm md:text-base italic text-center">
             More videos coming soon
           </p>
-
           <a
             href="/"
             className="group relative inline-flex items-center justify-center px-8 py-4 font-black uppercase tracking-tighter text-white bg-[#63c9f8] border-[3px] border-[#181922] rounded-full shadow-[6px_6px_0px_0px_rgba(126,34,206,0.4)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
@@ -247,14 +249,13 @@ export default function RobloxNichePage() {
 
 function VideoCard({ item }: { item: any }) {
   const getEmbedUrl = (url: string) => {
-    if (!url) return null;
+    if (!url || url === "COLOQUE_A_URL_AQUI") return null;
     let videoId = "";
     if (url.includes("shorts/"))
       videoId = url.split("shorts/")[1].split("?")[0];
     else if (url.includes("v=")) videoId = url.split("v=")[1].split("&")[0];
     else if (url.includes("youtu.be/"))
       videoId = url.split("youtu.be/")[1].split("?")[0];
-
     return videoId
       ? `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0`
       : null;
@@ -264,7 +265,6 @@ function VideoCard({ item }: { item: any }) {
 
   return (
     <div className="group flex flex-col gap-4">
-      {/* VÍDEO NO TOPO */}
       <div
         className={`relative w-full bg-white border-[3px] md:border-4 border-[#181922] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-[8px_8px_0px_0px_#181922] md:shadow-[12px_12px_0px_0px_#181922] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none ${
           item.type === "vertical" ? "aspect-[9/16]" : "aspect-video"
@@ -281,8 +281,10 @@ function VideoCard({ item }: { item: any }) {
           ></iframe>
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-purple-100 px-6 text-center">
-            <span className="text-[#d8b4fe] font-black uppercase text-lg italic">
-              {item.title}
+            <span className="text-[#7e22ce] font-black uppercase text-lg italic">
+              {item.videoUrl === "COLOQUE_A_URL_AQUI"
+                ? "Video Title"
+                : item.title}
             </span>
           </div>
         )}
@@ -290,8 +292,6 @@ function VideoCard({ item }: { item: any }) {
           {item.category}
         </div>
       </div>
-
-      {/* TEXTOS EMBAIXO NA ORDEM CERTA */}
       <div className="mt-4 md:mt-6 px-2">
         <h3 className="text-2xl md:text-3xl font-black text-[#181922] uppercase tracking-tighter leading-tight">
           {item.title}
@@ -336,7 +336,6 @@ function ContactItem({
       </div>
     </div>
   );
-
   return href ? (
     <a href={href} target="_blank" rel="noopener noreferrer" className="w-full">
       {content}
