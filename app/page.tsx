@@ -11,7 +11,6 @@ export default function Home() {
       <Hero />
       <Niches />
       <Videos />
-      <CustomersSection />
       <Skills />
       <Contact />
     </div>

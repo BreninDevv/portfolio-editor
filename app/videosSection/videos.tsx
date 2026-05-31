@@ -5,8 +5,6 @@ import IRL from "../../public/irl.png";
 import Minecraft from "../../public/minecraft.jpg";
 
 export default function Edits() {
-  // --- DADOS DOS NICHOS ---
-
   const robloxLongVideo = {
     creator: "@Dash",
     title: "Roblox Rivals 👑",
@@ -96,66 +94,138 @@ export default function Edits() {
   ];
 
   return (
-    <section
-      id="edits"
-      className="w-full bg-white bg-[radial-gradient(rgba(56,189,248,0.2)_2px,transparent_2px)] [background-size:24px_24px] py-16 px-6 flex flex-col items-center"
-    >
-      <h2 className="text-4xl font-bold text-[#181922] mb-16 text-center uppercase tracking-tighter">
-        My Best Edits
-      </h2>
+    <>
+      <style>{`
+        @keyframes grain {
+          0%, 100% { transform: translate(0, 0); }
+          10%       { transform: translate(-2%, -3%); }
+          20%       { transform: translate(3%, 2%); }
+          30%       { transform: translate(-1%, 4%); }
+          40%       { transform: translate(4%, -1%); }
+          50%       { transform: translate(-3%, 3%); }
+          60%       { transform: translate(2%, -4%); }
+          70%       { transform: translate(-4%, 1%); }
+          80%       { transform: translate(1%, -2%); }
+          90%       { transform: translate(3%, 4%); }
+        }
+        .grain-layer {
+          animation: grain 0.8s steps(1) infinite;
+        }
+        @keyframes iconPop {
+          0%   { transform: scale(1) rotate(0deg); }
+          30%  { transform: scale(1.25) rotate(-6deg); }
+          55%  { transform: scale(0.92) rotate(4deg); }
+          75%  { transform: scale(1.1) rotate(-2deg); }
+          100% { transform: scale(1) rotate(0deg); }
+        }
+        .icon-pop:hover {
+          animation: iconPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+      `}</style>
 
-      {/* 1. SEÇÃO ROBLOX */}
-      <NicheSection title="Roblox" icon={RobloxLogo} viewMoreHref="/roblox">
-        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
-          All videos have been edited for technical demonstration purposes ONLY.
-        </div>
-
-        <div className="flex flex-col gap-10">
-          <div className="w-full">
-            <VideoCard item={robloxLongVideo} />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-            {robloxEdits.map((item, index) => (
-              <VideoCard key={index} item={item} />
-            ))}
-          </div>
-        </div>
-      </NicheSection>
-
-      {/* 2. SEÇÃO MINECRAFT */}
-      <NicheSection
-        title="Minecraft"
-        icon={Minecraft}
-        viewMoreHref="/minecraft"
+      <section
+        id="edits"
+        className="relative w-full overflow-hidden py-16 px-6 flex flex-col items-center"
+        style={{ backgroundColor: "#F2EFE9" }}
       >
-        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
-          All videos have been edited for technical demonstration purposes ONLY.
-        </div>
+        {/* ── GRID ── */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(24,25,34,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(24,25,34,0.06) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
 
-        <div className="flex flex-col gap-10">
-          <div className="w-full">
-            <VideoCard item={minecraftLongVideo} />
+        {/* ── GRAIN TEXTURE ── */}
+        <div
+          className="grain-layer pointer-events-none absolute z-0"
+          style={{
+            inset: "-50%",
+            width: "200%",
+            height: "200%",
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "300px 300px",
+            opacity: 0.55,
+          }}
+        />
+
+        {/* ── RADIAL VIGNETTE (escurece bordas levemente) ── */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 100% 80% at 50% 50%, transparent 40%, rgba(24,25,34,0.06) 100%)",
+          }}
+        />
+
+        {/* ── GLOW TOPO ── */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 70% 40% at 50% -5%, rgba(56,189,248,0.10) 0%, transparent 70%)",
+          }}
+        />
+
+        {/* ── CONTEÚDO ── */}
+        <h2 className="relative z-10 text-4xl font-bold text-[#181922] mb-16 text-center uppercase tracking-tighter">
+          My Best Edits
+        </h2>
+
+        <NicheSection title="Roblox" icon={RobloxLogo} viewMoreHref="/roblox">
+          <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
+            All videos have been edited for technical demonstration purposes
+            ONLY.
+          </div>
+          <div className="flex flex-col gap-10">
+            <div className="w-full">
+              <VideoCard item={robloxLongVideo} />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+              {robloxEdits.map((item, index) => (
+                <VideoCard key={index} item={item} />
+              ))}
+            </div>
+          </div>
+        </NicheSection>
+
+        <NicheSection
+          title="Minecraft"
+          icon={Minecraft}
+          viewMoreHref="/minecraft"
+        >
+          <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
+            All videos have been edited for technical demonstration purposes
+            ONLY.
+          </div>
+          <div className="flex flex-col gap-10">
+            <div className="w-full">
+              <VideoCard item={minecraftLongVideo} />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+              {minecraftEdits.map((item, index) => (
+                <VideoCard key={index} item={item} />
+              ))}
+            </div>
+          </div>
+        </NicheSection>
+
+        <NicheSection title="IRL Stream" icon={IRL} viewMoreHref="/irl">
+          <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
+            All videos have been edited for technical demonstration purposes
+            ONLY.
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-            {minecraftEdits.map((item, index) => (
+            {irlEdits.map((item, index) => (
               <VideoCard key={index} item={item} />
             ))}
           </div>
-        </div>
-      </NicheSection>
-
-      {/* 3. SEÇÃO IRL STREAM */}
-      <NicheSection title="IRL Stream" icon={IRL} viewMoreHref="/irl">
-        <div className="flex justify-center text-[#181922] font-bold text-2xl pb-10 text-center">
-          All videos have been edited for technical demonstration purposes ONLY.
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-          {irlEdits.map((item, index) => (
-            <VideoCard key={index} item={item} />
-          ))}
-        </div>
-      </NicheSection>
-    </section>
+        </NicheSection>
+      </section>
+    </>
   );
 }
 
@@ -171,11 +241,11 @@ function NicheSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full max-w-6xl mb-24">
+    <div className="relative z-10 w-full max-w-6xl mb-24">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b-4 border-[#181922] pb-4 gap-4">
         <div className="flex items-center gap-4">
           {icon && (
-            <div className="w-12 h-12 bg-gray-100 rounded-lg border-2 border-[#181922] flex items-center justify-center overflow-hidden shrink-0 relative">
+            <div className="icon-pop w-12 h-12 bg-gray-100 rounded-lg border-2 border-[#181922] flex items-center justify-center overflow-hidden shrink-0 relative cursor-pointer">
               <Image
                 src={icon}
                 alt={`${title} icon`}
@@ -221,17 +291,13 @@ function NicheSection({
 function VideoCard({ item }: { item: any }) {
   const getEmbedUrl = (url: string) => {
     if (!url) return null;
-
-    // Se o link já for um link de embed, retorna ele mesmo
     if (url.includes("youtube.com/embed/")) return url;
-
     let videoId = "";
     if (url.includes("shorts/"))
       videoId = url.split("shorts/")[1].split("?")[0];
     else if (url.includes("v=")) videoId = url.split("v=")[1].split("&")[0];
     else if (url.includes("youtu.be/"))
       videoId = url.split("youtu.be/")[1].split("?")[0];
-
     return videoId
       ? `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&iv_load_policy=3`
       : null;
@@ -243,8 +309,8 @@ function VideoCard({ item }: { item: any }) {
     <div className="flex flex-col gap-4 group">
       <div
         className={`
-          relative w-full bg-[#181922] rounded-[2rem] border-[3px] border-[#181922] overflow-hidden 
-          shadow-[8px_8px_0px_0px_rgba(24,25,34,1)] transition-all 
+          relative w-full bg-[#181922] rounded-[2rem] border-[3px] border-[#181922] overflow-hidden
+          shadow-[8px_8px_0px_0px_rgba(24,25,34,1)] transition-all
           hover:translate-x-1 hover:translate-y-1 hover:shadow-none
           ${item.type === "vertical" ? "aspect-[9/16]" : "aspect-video"}
         `}
@@ -263,7 +329,6 @@ function VideoCard({ item }: { item: any }) {
             {item.title} <br /> (Video URL not set)
           </div>
         )}
-
         <div className="absolute top-4 left-4 z-10 bg-[#181922] text-white text-[10px] font-bold px-3 py-1 rounded-lg uppercase pointer-events-none border border-white/10">
           {item.category}
         </div>

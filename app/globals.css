@@ -7,7 +7,3 @@
   --font-itim: "Itim", cursive;
   --font-pacifico: "Pacifico", cursive;
 }
-
-html {
-  scroll-behavior: smooth;
-}
