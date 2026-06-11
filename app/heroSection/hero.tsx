@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import YouBrenno from "../favicon.ico";
 import Premiere from "../../public/premiere.png";
 import AfterEffects from "../../public/aftereffects.png";
-import DaVinci from "../../public/davinci.png";
 
 export default function Hero() {
   const [menu, setMenu] = useState(false);
@@ -162,33 +161,11 @@ export default function Hero() {
 
         {/* Subtítulo */}
         <p className="text-[#181922]/40 font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] sm:text-xs md:text-sm mb-8">
-          Professional Video Editor & Specialist
+          Professional <b className="text-blue-400">Video Editor</b> &{" "}
+          <b className="text-blue-400">Specialist</b>
         </p>
-
-        {/* LOGOS SOFTWARE (Com seu estilo original de borda tracejada) */}
-        <div className="flex gap-4 sm:gap-6 md:gap-10 mb-10 bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-3xl border-2 border-dashed border-gray-200 shadow-sm transition-transform hover:scale-[1.02] duration-300">
-          <Image
-            src={Premiere}
-            alt="Premiere"
-            width={70}
-            height={70}
-            className="w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 hover:scale-115 duration-300 object-contain cursor-pointer"
-          />
-          <Image
-            src={AfterEffects}
-            alt="AfterEffects"
-            width={70}
-            height={70}
-            className="w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 hover:scale-115 duration-300 object-contain cursor-pointer"
-          />
-        </div>
 
         {/* Descrição Curta */}
-        <p className="max-w-xs md:max-w-2xl text-base sm:text-lg md:text-2xl text-gray-700 font-medium leading-snug">
-          Specializing in{" "}
-          <span className="text-blue-600 font-bold">Retention</span> shorts and
-          long-form videos.
-        </p>
       </div>
     </section>
   );
