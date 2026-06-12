@@ -38,7 +38,7 @@ export default function Skills() {
     // Replay Mod: Escala reduzida um pouco mais para alinhar visualmente com os outros ícones
     {
       id: 4,
-      name: "Replay Mod",
+      name: "Flashback Mod",
       type: "Minecraft",
       img: MinecraftLogo,
       fit: "cover",
