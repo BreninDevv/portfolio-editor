@@ -7,8 +7,9 @@ import Twitch from "../../public/twitch.png";
 import Minecraft from "../../public/minecraft.jpg";
 
 export default function Niches() {
-  const canvasRef = useRef(null);
-  const sectionRef = useRef(null);
+  // CORREÇÃO: Adicionada a tipagem correta para os elementos HTML correspondentes
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const nicheData = [
     {
@@ -37,21 +38,23 @@ export default function Niches() {
     const wrapper = sectionRef.current;
     if (!canvas || !wrapper) return;
     const ctx = canvas.getContext("2d");
+    if (!ctx) return; // Verificação de segurança para o contexto 2D
 
-    let width, height, dpr;
+    let width: number, height: number, dpr: number;
     let mouseX = -9999,
       mouseY = -9999;
     let targetMouseX = -9999,
       targetMouseY = -9999;
     let mousePresence = 0;
     let t = 0;
-    let rafId;
+    let rafId: number;
 
     const spacing = 40;
     const sinkRadius = 220;
     const maxPull = 0.65;
 
     function resize() {
+      if (!canvas || !wrapper || !ctx) return;
       dpr = window.devicePixelRatio || 1;
       width = wrapper.clientWidth;
       height = wrapper.clientHeight;
@@ -62,7 +65,8 @@ export default function Niches() {
     resize();
     window.addEventListener("resize", resize);
 
-    function handleMouseMove(e) {
+    function handleMouseMove(e: MouseEvent) {
+      if (!wrapper) return;
       const rect = wrapper.getBoundingClientRect();
       targetMouseX = e.clientX - rect.left;
       targetMouseY = e.clientY - rect.top;
@@ -71,7 +75,8 @@ export default function Niches() {
       targetMouseX = -9999;
       targetMouseY = -9999;
     }
-    function handleTouchMove(e) {
+    function handleTouchMove(e: TouchEvent) {
+      if (!wrapper) return;
       const rect = wrapper.getBoundingClientRect();
       const touch = e.touches[0];
       targetMouseX = touch.clientX - rect.left;
@@ -91,7 +96,7 @@ export default function Niches() {
     const lineColor = "rgba(24,25,34,0.18)";
     const dotColor = "#7fd4ff";
 
-    function turbulence(x, y, time) {
+    function turbulence(x: number, y: number, time: number) {
       const ox =
         Math.sin(x * 0.012 + time * 0.6) * Math.cos(y * 0.01 - time * 0.4) * 6 +
         Math.sin(x * 0.025 - time * 0.3) * 3;
@@ -103,7 +108,13 @@ export default function Niches() {
       return [ox, oy];
     }
 
-    function sink(x, y, mx, my, presence) {
+    function sink(
+      x: number,
+      y: number,
+      mx: number,
+      my: number,
+      presence: number,
+    ) {
       if (presence <= 0.001) return [0, 0];
       const dx = mx - x;
       const dy = my - y;
@@ -115,7 +126,7 @@ export default function Niches() {
       return [(dx / dist) * travel, (dy / dist) * travel];
     }
 
-    function warpPoint(x0, y0) {
+    function warpPoint(x0: number, y0: number) {
       const [tx, ty] = turbulence(x0, y0, t);
       const bx = x0 + tx;
       const by = y0 + ty;
@@ -123,8 +134,8 @@ export default function Niches() {
       return [bx + sx, by + sy];
     }
 
-    function strokeSmoothLine(points) {
-      if (points.length < 2) return;
+    function strokeSmoothLine(points: number[][]) {
+      if (points.length < 2 || !ctx) return;
       ctx.beginPath();
       ctx.moveTo(points[0][0], points[0][1]);
       for (let i = 0; i < points.length - 1; i++) {
@@ -140,6 +151,7 @@ export default function Niches() {
     }
 
     function draw() {
+      if (!ctx) return;
       mouseX += (targetMouseX - mouseX) * 0.15;
       mouseY += (targetMouseY - mouseY) * 0.15;
       const targetPresence = targetMouseX > -1000 ? 1 : 0;
@@ -158,7 +170,7 @@ export default function Niches() {
 
       for (let r = -2; r <= rows; r++) {
         const y0 = r * spacing - margin;
-        const pts = [];
+        const pts: number[][] = [];
         for (let c = -2; c <= cols; c++) {
           const x0 = c * spacing - margin;
           pts.push(warpPoint(x0, y0));
@@ -168,7 +180,7 @@ export default function Niches() {
 
       for (let c = -2; c <= cols; c++) {
         const x0 = c * spacing - margin;
-        const pts = [];
+        const pts: number[][] = [];
         for (let r = -2; r <= rows; r++) {
           const y0 = r * spacing - margin;
           pts.push(warpPoint(x0, y0));
@@ -203,10 +215,12 @@ export default function Niches() {
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", resize);
-      wrapper.removeEventListener("mousemove", handleMouseMove);
-      wrapper.removeEventListener("mouseleave", handleMouseLeave);
-      wrapper.removeEventListener("touchmove", handleTouchMove);
-      wrapper.removeEventListener("touchend", handleTouchEnd);
+      if (wrapper) {
+        wrapper.removeEventListener("mousemove", handleMouseMove);
+        wrapper.removeEventListener("mouseleave", handleMouseLeave);
+        wrapper.removeEventListener("touchmove", handleTouchMove);
+        wrapper.removeEventListener("touchend", handleTouchEnd);
+      }
     };
   }, []);
 
