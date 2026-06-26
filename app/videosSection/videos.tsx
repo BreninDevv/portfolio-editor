@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import RobloxLogo from "../../public/roblox.png";
 import Dark from "../../public/dark.png";
 import IRL from "../../public/irl.png";
@@ -93,6 +96,195 @@ export default function Edits() {
     },
   ];
 
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // --- BACKGROUND GRID INTERATIVO (turbulencia + sink no mouse) ---
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const wrapper = sectionRef.current;
+    if (!canvas || !wrapper) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let width: number, height: number, dpr: number;
+    let mouseX = -9999,
+      mouseY = -9999;
+    let targetMouseX = -9999,
+      targetMouseY = -9999;
+    let mousePresence = 0;
+    let t = 0;
+    let rafId: number;
+
+    const spacing = 40;
+    const sinkRadius = 220;
+    const maxPull = 0.65;
+
+    function resize() {
+      dpr = window.devicePixelRatio || 1;
+      width = wrapper!.clientWidth;
+      height = wrapper!.clientHeight;
+      canvas!.width = width * dpr;
+      canvas!.height = height * dpr;
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    function handleMouseMove(e: MouseEvent) {
+      const rect = wrapper!.getBoundingClientRect();
+      targetMouseX = e.clientX - rect.left;
+      targetMouseY = e.clientY - rect.top;
+    }
+    function handleMouseLeave() {
+      targetMouseX = -9999;
+      targetMouseY = -9999;
+    }
+    function handleTouchMove(e: TouchEvent) {
+      const rect = wrapper!.getBoundingClientRect();
+      const touch = e.touches[0];
+      targetMouseX = touch.clientX - rect.left;
+      targetMouseY = touch.clientY - rect.top;
+    }
+    function handleTouchEnd() {
+      targetMouseX = -9999;
+      targetMouseY = -9999;
+    }
+
+    wrapper.addEventListener("mousemove", handleMouseMove);
+    wrapper.addEventListener("mouseleave", handleMouseLeave);
+    wrapper.addEventListener("touchmove", handleTouchMove, { passive: true });
+    wrapper.addEventListener("touchend", handleTouchEnd);
+
+    // grid escuro sutil sobre o fundo claro #F2EFE9
+    const lineColor = "rgba(24,25,34,0.16)";
+    const dotColor = "#181922";
+
+    function turbulence(x: number, y: number, time: number) {
+      const ox =
+        Math.sin(x * 0.012 + time * 0.6) * Math.cos(y * 0.01 - time * 0.4) * 9 +
+        Math.sin(x * 0.025 - time * 0.3) * 4;
+      const oy =
+        Math.cos(y * 0.013 - time * 0.5) *
+          Math.sin(x * 0.009 + time * 0.35) *
+          9 +
+        Math.cos(y * 0.02 + time * 0.25) * 4;
+      return [ox, oy];
+    }
+
+    function sink(
+      x: number,
+      y: number,
+      mx: number,
+      my: number,
+      presence: number,
+    ) {
+      if (presence <= 0.001) return [0, 0];
+      const dx = mx - x;
+      const dy = my - y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > sinkRadius || dist < 0.0001) return [0, 0];
+      const t2 = 1 - dist / sinkRadius;
+      const falloff = t2 * t2 * (3 - 2 * t2);
+      const travel = dist * falloff * maxPull * presence;
+      return [(dx / dist) * travel, (dy / dist) * travel];
+    }
+
+    function warpPoint(x0: number, y0: number) {
+      const [tx, ty] = turbulence(x0, y0, t);
+      const bx = x0 + tx;
+      const by = y0 + ty;
+      const [sx, sy] = sink(bx, by, mouseX, mouseY, mousePresence);
+      return [bx + sx, by + sy];
+    }
+
+    function strokeSmoothLine(points: number[][]) {
+      if (points.length < 2) return;
+      ctx!.beginPath();
+      ctx!.moveTo(points[0][0], points[0][1]);
+      for (let i = 0; i < points.length - 1; i++) {
+        const p0 = points[i];
+        const p1 = points[i + 1];
+        const mx = (p0[0] + p1[0]) / 2;
+        const my = (p0[1] + p1[1]) / 2;
+        ctx!.quadraticCurveTo(p0[0], p0[1], mx, my);
+      }
+      const last = points[points.length - 1];
+      ctx!.lineTo(last[0], last[1]);
+      ctx!.stroke();
+    }
+
+    function draw() {
+      mouseX += (targetMouseX - mouseX) * 0.15;
+      mouseY += (targetMouseY - mouseY) * 0.15;
+      const targetPresence = targetMouseX > -1000 ? 1 : 0;
+      mousePresence += (targetPresence - mousePresence) * 0.08;
+      t += 0.012;
+
+      ctx!.clearRect(0, 0, width, height);
+      ctx!.lineWidth = 1;
+      ctx!.strokeStyle = lineColor;
+      ctx!.lineJoin = "round";
+      ctx!.lineCap = "round";
+
+      const margin = spacing * 2;
+      const cols = Math.ceil((width + margin * 2) / spacing);
+      const rows = Math.ceil((height + margin * 2) / spacing);
+
+      for (let r = -2; r <= rows; r++) {
+        const y0 = r * spacing - margin;
+        const pts: number[][] = [];
+        for (let c = -2; c <= cols; c++) {
+          const x0 = c * spacing - margin;
+          pts.push(warpPoint(x0, y0));
+        }
+        strokeSmoothLine(pts);
+      }
+
+      for (let c = -2; c <= cols; c++) {
+        const x0 = c * spacing - margin;
+        const pts: number[][] = [];
+        for (let r = -2; r <= rows; r++) {
+          const y0 = r * spacing - margin;
+          pts.push(warpPoint(x0, y0));
+        }
+        strokeSmoothLine(pts);
+      }
+
+      if (mousePresence > 0.01) {
+        for (let r = -2; r <= rows; r++) {
+          for (let c = -2; c <= cols; c++) {
+            const x0 = c * spacing - margin;
+            const y0 = r * spacing - margin;
+            const dist0 = Math.hypot(x0 - mouseX, y0 - mouseY);
+            if (dist0 < sinkRadius) {
+              const [wx, wy] = warpPoint(x0, y0);
+              const alpha = (1 - dist0 / sinkRadius) * mousePresence * 0.5;
+              ctx!.globalAlpha = alpha;
+              ctx!.fillStyle = dotColor;
+              ctx!.beginPath();
+              ctx!.arc(wx, wy, 2, 0, Math.PI * 2);
+              ctx!.fill();
+            }
+          }
+        }
+        ctx!.globalAlpha = 1;
+      }
+
+      rafId = requestAnimationFrame(draw);
+    }
+    draw();
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", resize);
+      wrapper.removeEventListener("mousemove", handleMouseMove);
+      wrapper.removeEventListener("mouseleave", handleMouseLeave);
+      wrapper.removeEventListener("touchmove", handleTouchMove);
+      wrapper.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, []);
+
   return (
     <>
       <style>{`
@@ -121,21 +313,25 @@ export default function Edits() {
         .icon-pop:hover {
           animation: iconPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
+        @keyframes shortIn {
+          0% { opacity: 0; transform: translateX(14%) scale(0.96); }
+          100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-shortIn {
+          animation: shortIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
       `}</style>
 
       <section
+        ref={sectionRef}
         id="edits"
         className="relative w-full overflow-hidden py-16 px-6 flex flex-col items-center"
         style={{ backgroundColor: "#F2EFE9" }}
       >
-        {/* ── GRID ── */}
-        <div
-          className="pointer-events-none absolute inset-0 z-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(24,25,34,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(24,25,34,0.06) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
+        {/* ── GRID INTERATIVO ── */}
+        <canvas
+          ref={canvasRef}
+          className="pointer-events-none absolute inset-0 z-0 w-full h-full"
         />
 
         {/* ── GRAIN TEXTURE ── */}
@@ -180,16 +376,7 @@ export default function Edits() {
             All videos have been edited for technical demonstration purposes
             ONLY.
           </div>
-          <div className="flex flex-col gap-10">
-            <div className="w-full">
-              <VideoCard item={robloxLongVideo} />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-              {robloxEdits.map((item, index) => (
-                <VideoCard key={index} item={item} />
-              ))}
-            </div>
-          </div>
+          <NicheLayout longVideo={robloxLongVideo} shorts={robloxEdits} />
         </NicheSection>
 
         <NicheSection
@@ -201,16 +388,7 @@ export default function Edits() {
             All videos have been edited for technical demonstration purposes
             ONLY.
           </div>
-          <div className="flex flex-col gap-10">
-            <div className="w-full">
-              <VideoCard item={minecraftLongVideo} />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-              {minecraftEdits.map((item, index) => (
-                <VideoCard key={index} item={item} />
-              ))}
-            </div>
-          </div>
+          <NicheLayout longVideo={minecraftLongVideo} shorts={minecraftEdits} />
         </NicheSection>
 
         <NicheSection title="IRL Stream" icon={IRL} viewMoreHref="/irl">
@@ -218,14 +396,41 @@ export default function Edits() {
             All videos have been edited for technical demonstration purposes
             ONLY.
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-            {irlEdits.map((item, index) => (
-              <VideoCard key={index} item={item} />
-            ))}
-          </div>
+          <NicheLayout longVideo={null} shorts={irlEdits} />
         </NicheSection>
       </section>
     </>
+  );
+}
+
+function NicheLayout({
+  longVideo,
+  shorts,
+}: {
+  longVideo: any | null;
+  shorts: any[];
+}) {
+  if (!longVideo) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+        {shorts.map((item, index) => (
+          <VideoCard key={index} item={item} />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-10">
+      <div className="w-full">
+        <VideoCard item={longVideo} />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+        {shorts.map((item, index) => (
+          <VideoCard key={index} item={item} />
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -288,7 +493,17 @@ function NicheSection({
   );
 }
 
-function VideoCard({ item }: { item: any }) {
+function VideoCard({
+  item,
+  compact = false,
+  dimmed = false,
+  fillHeight = false,
+}: {
+  item: any;
+  compact?: boolean;
+  dimmed?: boolean;
+  fillHeight?: boolean;
+}) {
   const getEmbedUrl = (url: string) => {
     if (!url) return null;
     if (url.includes("youtube.com/embed/")) return url;
@@ -306,13 +521,22 @@ function VideoCard({ item }: { item: any }) {
   const embedUrl = getEmbedUrl(item.videoUrl);
 
   return (
-    <div className="flex flex-col gap-4 group">
+    <div
+      className="flex flex-col gap-3 group w-full"
+      style={{ opacity: dimmed ? 0.18 : 1 }}
+    >
       <div
         className={`
           relative w-full bg-[#181922] rounded-[2rem] border-[3px] border-[#181922] overflow-hidden
           shadow-[8px_8px_0px_0px_rgba(24,25,34,1)] transition-all
-          hover:translate-x-1 hover:translate-y-1 hover:shadow-none
-          ${item.type === "vertical" ? "aspect-[9/16]" : "aspect-video"}
+          ${!dimmed ? "hover:translate-x-1 hover:translate-y-1 hover:shadow-none" : ""}
+          ${
+            item.type === "vertical"
+              ? fillHeight
+                ? "aspect-[9/16] md:aspect-auto md:h-full md:min-h-[480px]"
+                : "aspect-[9/16]"
+              : "aspect-video"
+          }
         `}
       >
         {embedUrl ? (
@@ -335,7 +559,11 @@ function VideoCard({ item }: { item: any }) {
       </div>
 
       <div className="px-2">
-        <h4 className="text-2xl font-bold text-[#181922] leading-tight line-clamp-1">
+        <h4
+          className={`font-bold text-[#181922] leading-tight line-clamp-1 ${
+            compact ? "text-lg" : "text-2xl"
+          }`}
+        >
           {item.title}
         </h4>
         <p className="text-xs font-sans text-gray-600 font-bold uppercase tracking-widest mt-1">

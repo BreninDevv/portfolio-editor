@@ -2,70 +2,32 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import RobloxLogo from "../../public/roblox.png";
+import Twitch from "../../public/twitch.png";
+import Minecraft from "../../public/minecraft.jpg";
 
-// Imports de Imagens
-import Capcut from "../../public/capcut.png";
-import Premiere from "../../public/premiere.png";
-import AfterEffects from "../../public/aftereffects.png";
-import MinecraftLogo from "../../public/minecraft.jpg";
-import Youtube from "../../public/youtube.png";
-import Shorts from "../../public/shorts.png";
-import Personagem1 from "../../public/personagem1.png";
-
-export default function Skills() {
+export default function Showreel() {
   const canvasRef = useRef(null);
   const sectionRef = useRef(null);
 
-  const skills = [
+  const nicheData = [
     {
       id: 1,
-      name: "Premiere Pro",
-      type: "Software",
-      img: Premiere,
-      fit: "contain",
-      padding: "p-3",
+      title: "Roblox",
+      slogan: "High-paced editing for maximum viewer retention.",
+      icon: RobloxLogo,
     },
     {
       id: 2,
-      name: "After Effects",
-      type: "Software",
-      img: AfterEffects,
-      fit: "contain",
-      padding: "p-3",
+      title: "Minecraft",
+      slogan: "High-quality videos with replay mod",
+      icon: Minecraft,
     },
     {
       id: 3,
-      name: "CapCut",
-      type: "Software",
-      img: Capcut,
-      fit: "contain",
-      padding: "p-4",
-    },
-    // Replay Mod: Escala reduzida um pouco mais para alinhar visualmente com os outros ícones
-    {
-      id: 4,
-      name: "Flashback Mod",
-      type: "Minecraft",
-      img: MinecraftLogo,
-      fit: "cover",
-      padding: "p-0",
-      imgScale: "scale-[0.80]",
-    },
-    {
-      id: 5,
-      name: "Short Form",
-      type: "Format",
-      img: Shorts,
-      fit: "contain",
-      padding: "p-4",
-    },
-    {
-      id: 6,
-      name: "Long Form",
-      type: "Format",
-      img: Youtube,
-      fit: "contain",
-      padding: "p-4",
+      title: "IRL Stream",
+      slogan: "I turn IRL stream moments into highlights.",
+      icon: Twitch,
     },
   ];
 
@@ -125,7 +87,7 @@ export default function Skills() {
     wrapper.addEventListener("touchmove", handleTouchMove, { passive: true });
     wrapper.addEventListener("touchend", handleTouchEnd);
 
-    // grid escuro sutil sobre o fundo roxo claro, mesmo padrao das outras secoes
+    // grid escuro sobre o fundo azul, mais visivel
     const lineColor = "rgba(24,25,34,0.32)";
     const dotColor = "#ffffff";
 
@@ -251,75 +213,97 @@ export default function Skills() {
   return (
     <section
       ref={sectionRef}
-      id="skills"
-      className="relative w-full min-h-screen bg-[#c4a6f5] py-12 px-6 flex flex-col items-center justify-center overflow-hidden"
+      id="showreel"
+      className="relative w-full min-h-screen flex flex-col items-center justify-center py-16 sm:py-20 md:py-24 px-4 sm:px-6 overflow-hidden"
+      style={{ backgroundColor: "#61b8ff" }}
     >
-      {/* BACKGROUND GRID INTERATIVO */}
+      {/* GRID BACKGROUND INTERATIVO */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 z-0 w-full h-full"
+        className="absolute inset-0 w-full h-full"
         style={{
-          maskImage: "radial-gradient(circle, black 30%, transparent 95%)",
           WebkitMaskImage:
-            "radial-gradient(circle, black 30%, transparent 95%)",
+            "radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+          maskImage:
+            "radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
         }}
       />
 
-      <div className="relative z-10 flex flex-col items-center w-full">
-        {/* Título */}
+      <div className="relative z-10 max-w-6xl w-full mx-auto flex flex-col items-center">
+        {/* TÍTULO COM GLOW */}
         <h2
-          className="text-5xl md:text-6xl font-bold mb-12 md:mb-16 text-center uppercase tracking-tighter"
+          className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8 sm:mb-12 md:mb-16 text-center"
           style={{
-            color: "#ffffff",
+            color: "#FFFFFF",
             textShadow:
               "0 0 18px rgba(255,255,255,0.6), 0 0 42px rgba(255,255,255,0.35)",
           }}
         >
-          My Skills
+          Showreel
         </h2>
 
-        {/* Container Flex */}
-        <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-center gap-10 md:gap-14">
-          {/* Personagem Esquerda */}
-          <div className="hidden md:block w-full max-w-[340px] lg:max-w-[420px] hover:scale-110 duration-500 cursor-pointer transition-transform ease-out">
-            <Image
-              src={Personagem1}
-              alt="Avatar"
-              className="w-full h-auto object-contain"
-              priority
-            />
+        {/* PLAYER DE VÍDEO COM MOLDURA */}
+        <div className="relative w-full max-w-4xl">
+          <div
+            className="aspect-video border-2 border-white bg-[#111114]"
+            style={{
+              borderRadius: "2.5rem",
+              overflow: "hidden",
+              isolation: "isolate",
+            }}
+          >
+            <video
+              className="w-full h-full object-cover"
+              style={{ borderRadius: "2.5rem" }}
+              controls
+              playsInline
+              preload="metadata"
+              poster=""
+            >
+              {/* Coloque o caminho do seu vídeo aqui */}
+              <source src="/showreel.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeo.
+            </video>
           </div>
+        </div>
 
-          {/* Grid de Skills Direita */}
-          <div className="w-full max-w-2xl grid grid-cols-2 gap-y-10 gap-x-8">
-            {skills.map((skill) => (
-              <div
-                key={skill.id}
-                className="flex flex-col items-center group cursor-default"
-              >
-                {/* MOLDURA: Mantida com tamanho fixo para manter o grid alinhado */}
-                <div
-                  className={`w-24 h-24 md:w-36 md:h-36 bg-white rounded-2xl border-[3px] border-[#181922] shadow-[6px_6px_0px_0px_#181922] overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none cursor-pointer ${skill.padding}`}
-                >
+        {/* GRID DE NICHOS (abaixo do vídeo) */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-8 md:gap-12 lg:gap-16 w-full max-w-4xl mt-12 sm:mt-16 md:mt-20">
+          {nicheData.map((niche) => (
+            <div
+              key={niche.id}
+              className="group flex flex-col items-center text-center w-full"
+            >
+              {/* MOLDURA DA LOGO */}
+              <div className="cursor-pointer relative w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 bg-white border-[4px] border-[#181922] rounded-[2rem] overflow-hidden shadow-[8px_8px_0px_0px_rgba(24,25,34,1)] transition-all duration-300 group-hover:translate-x-2 group-hover:translate-y-2 group-hover:shadow-none">
+                {niche.icon ? (
                   <Image
-                    src={skill.img}
-                    alt={skill.name}
-                    className={`w-full h-full rounded-xl ${skill.fit === "cover" ? "object-cover" : "object-contain"} ${skill.imgScale || ""}`}
+                    src={niche.icon}
+                    alt={niche.title}
+                    fill
+                    sizes="(max-width: 768px) 112px, 160px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                </div>
-
-                {/* TEXTOS */}
-                <div className="mt-4 text-center">
-                  <h3 className="text-lg md:text-xl font-black text-[#181922] leading-tight uppercase tracking-tighter">
-                    {skill.name}
-                  </h3>
-                  <p className="text-[10px] md:text-xs font-sans text-white font-bold uppercase tracking-widest mt-1">
-                    {skill.type}
-                  </p>
-                </div>
+                ) : (
+                  <div className="w-full h-full bg-gray-100 flex items-center justify-center px-4">
+                    <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest leading-tight">
+                      Logo Space
+                    </span>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
+
+              {/* TEXTOS */}
+              <div className="mt-5 sm:mt-6 md:mt-8 flex flex-col items-center w-full px-2">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-[#181922] uppercase tracking-tighter leading-none mb-2 sm:mb-3">
+                  {niche.title}
+                </h3>
+                <p className="max-w-[220px] sm:max-w-[200px] md:max-w-[220px] text-sm sm:text-base md:text-lg font-sans text-[#181922] font-bold leading-tight italic opacity-90">
+                  "{niche.slogan}"
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
