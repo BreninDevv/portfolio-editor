@@ -8,8 +8,8 @@ import Discord from "../../public/discord.jpg";
 import X from "../../public/x.png";
 
 export default function Contact() {
-  const canvasRef = useRef(null);
-  const sectionRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // --- BACKGROUND GRID INTERATIVO (turbulencia + sink no mouse) ---
   useEffect(() => {
@@ -17,15 +17,16 @@ export default function Contact() {
     const wrapper = sectionRef.current;
     if (!canvas || !wrapper) return;
     const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    let width, height, dpr;
+    let width: number, height: number, dpr: number;
     let mouseX = -9999,
       mouseY = -9999;
     let targetMouseX = -9999,
       targetMouseY = -9999;
     let mousePresence = 0;
     let t = 0;
-    let rafId;
+    let rafId: number;
 
     const spacing = 40;
     const sinkRadius = 220;
@@ -33,17 +34,17 @@ export default function Contact() {
 
     function resize() {
       dpr = window.devicePixelRatio || 1;
-      width = wrapper.clientWidth;
-      height = wrapper.clientHeight;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      width = wrapper!.clientWidth;
+      height = wrapper!.clientHeight;
+      canvas!.width = width * dpr;
+      canvas!.height = height * dpr;
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     resize();
     window.addEventListener("resize", resize);
 
-    function handleMouseMove(e) {
-      const rect = wrapper.getBoundingClientRect();
+    function handleMouseMove(e: MouseEvent) {
+      const rect = wrapper!.getBoundingClientRect();
       targetMouseX = e.clientX - rect.left;
       targetMouseY = e.clientY - rect.top;
     }
@@ -51,8 +52,8 @@ export default function Contact() {
       targetMouseX = -9999;
       targetMouseY = -9999;
     }
-    function handleTouchMove(e) {
-      const rect = wrapper.getBoundingClientRect();
+    function handleTouchMove(e: TouchEvent) {
+      const rect = wrapper!.getBoundingClientRect();
       const touch = e.touches[0];
       targetMouseX = touch.clientX - rect.left;
       targetMouseY = touch.clientY - rect.top;
@@ -71,7 +72,7 @@ export default function Contact() {
     const lineColor = "rgba(255,255,255,0.06)";
     const dotColor = "#7fd4ff";
 
-    function turbulence(x, y, time) {
+    function turbulence(x: number, y: number, time: number) {
       const ox =
         Math.sin(x * 0.012 + time * 0.6) * Math.cos(y * 0.01 - time * 0.4) * 6 +
         Math.sin(x * 0.025 - time * 0.3) * 3;
@@ -83,7 +84,13 @@ export default function Contact() {
       return [ox, oy];
     }
 
-    function sink(x, y, mx, my, presence) {
+    function sink(
+      x: number,
+      y: number,
+      mx: number,
+      my: number,
+      presence: number,
+    ) {
       if (presence <= 0.001) return [0, 0];
       const dx = mx - x;
       const dy = my - y;
@@ -95,7 +102,7 @@ export default function Contact() {
       return [(dx / dist) * travel, (dy / dist) * travel];
     }
 
-    function warpPoint(x0, y0) {
+    function warpPoint(x0: number, y0: number) {
       const [tx, ty] = turbulence(x0, y0, t);
       const bx = x0 + tx;
       const by = y0 + ty;
@@ -103,20 +110,20 @@ export default function Contact() {
       return [bx + sx, by + sy];
     }
 
-    function strokeSmoothLine(points) {
+    function strokeSmoothLine(points: number[][]) {
       if (points.length < 2) return;
-      ctx.beginPath();
-      ctx.moveTo(points[0][0], points[0][1]);
+      ctx!.beginPath();
+      ctx!.moveTo(points[0][0], points[0][1]);
       for (let i = 0; i < points.length - 1; i++) {
         const p0 = points[i];
         const p1 = points[i + 1];
         const mx = (p0[0] + p1[0]) / 2;
         const my = (p0[1] + p1[1]) / 2;
-        ctx.quadraticCurveTo(p0[0], p0[1], mx, my);
+        ctx!.quadraticCurveTo(p0[0], p0[1], mx, my);
       }
       const last = points[points.length - 1];
-      ctx.lineTo(last[0], last[1]);
-      ctx.stroke();
+      ctx!.lineTo(last[0], last[1]);
+      ctx!.stroke();
     }
 
     function draw() {
@@ -126,11 +133,11 @@ export default function Contact() {
       mousePresence += (targetPresence - mousePresence) * 0.08;
       t += 0.012;
 
-      ctx.clearRect(0, 0, width, height);
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = lineColor;
-      ctx.lineJoin = "round";
-      ctx.lineCap = "round";
+      ctx!.clearRect(0, 0, width, height);
+      ctx!.lineWidth = 1;
+      ctx!.strokeStyle = lineColor;
+      ctx!.lineJoin = "round";
+      ctx!.lineCap = "round";
 
       const margin = spacing * 2;
       const cols = Math.ceil((width + margin * 2) / spacing);
@@ -138,7 +145,7 @@ export default function Contact() {
 
       for (let r = -2; r <= rows; r++) {
         const y0 = r * spacing - margin;
-        const pts = [];
+        const pts: number[][] = [];
         for (let c = -2; c <= cols; c++) {
           const x0 = c * spacing - margin;
           pts.push(warpPoint(x0, y0));
@@ -148,7 +155,7 @@ export default function Contact() {
 
       for (let c = -2; c <= cols; c++) {
         const x0 = c * spacing - margin;
-        const pts = [];
+        const pts: number[][] = [];
         for (let r = -2; r <= rows; r++) {
           const y0 = r * spacing - margin;
           pts.push(warpPoint(x0, y0));
@@ -165,15 +172,15 @@ export default function Contact() {
             if (dist0 < sinkRadius) {
               const [wx, wy] = warpPoint(x0, y0);
               const alpha = (1 - dist0 / sinkRadius) * mousePresence * 0.55;
-              ctx.globalAlpha = alpha;
-              ctx.fillStyle = dotColor;
-              ctx.beginPath();
-              ctx.arc(wx, wy, 2, 0, Math.PI * 2);
-              ctx.fill();
+              ctx!.globalAlpha = alpha;
+              ctx!.fillStyle = dotColor;
+              ctx!.beginPath();
+              ctx!.arc(wx, wy, 2, 0, Math.PI * 2);
+              ctx!.fill();
             }
           }
         }
-        ctx.globalAlpha = 1;
+        ctx!.globalAlpha = 1;
       }
 
       rafId = requestAnimationFrame(draw);
