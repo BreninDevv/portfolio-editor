@@ -271,7 +271,7 @@ export default function Showreel() {
           >
             <video
               ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="w-full h-full object-cover block"
               style={{ borderRadius: "2.5rem" }}
               autoPlay
               loop
