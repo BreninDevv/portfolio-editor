@@ -10,6 +10,7 @@ export default function Showreel() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const nicheData = [
@@ -35,7 +36,18 @@ export default function Showreel() {
     }
   };
 
-  // --- BACKGROUND GRID INTERATIVO (turbulencia + sink no mouse) ---
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  // --- INTERACTIVE BACKGROUND GRID ---
   useEffect(() => {
     const canvas = canvasRef.current;
     const wrapper = sectionRef.current;
@@ -95,7 +107,6 @@ export default function Showreel() {
     wrapper.addEventListener("touchmove", handleTouchMove, { passive: true });
     wrapper.addEventListener("touchend", handleTouchEnd);
 
-    // linhas sutis em azul escuro, pontos em azul claro (mesma paleta do resto do site)
     const lineColor = "rgba(24,25,34,0.10)";
     const dotColor = "#3b82f6";
 
@@ -236,7 +247,6 @@ export default function Showreel() {
         background: "#dbeafe",
       }}
     >
-      {/* Grid animado interativo (canvas) */}
       <canvas ref={canvasRef} className="absolute inset-0 z-0 w-full h-full" />
 
       <div className="relative z-10 max-w-6xl w-full mx-auto flex flex-col items-center">
@@ -252,11 +262,12 @@ export default function Showreel() {
 
         <div className="relative w-full max-w-4xl">
           <div
-            className="aspect-video border-2 border-[#181922] bg-[#111114] relative overflow-hidden shadow-[8px_8px_0px_0px_rgba(24,25,34,1)]"
+            className="aspect-video border-2 border-[#181922] bg-[#111114] relative overflow-hidden shadow-[8px_8px_0px_0px_rgba(24,25,34,1)] cursor-pointer group"
             style={{
               borderRadius: "2.5rem",
               isolation: "isolate",
             }}
+            onClick={togglePlay}
           >
             <video
               ref={videoRef}
@@ -266,19 +277,55 @@ export default function Showreel() {
               loop
               muted
               playsInline
-              preload="metadata"
+              preload="auto"
               controls={false}
               disablePictureInPicture
             >
               <source src="/videos/PortfolioIntro.mp4" type="video/mp4" />
-              Seu navegador não suporta vídeos.
+              Your browser does not support videos.
             </video>
 
-            {/* Botão de Som Estilizado */}
+            {/* Centralized Play/Pause Badge Indicator */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="bg-[#181922]/85 border border-white/20 text-[#F2EFE9] px-6 py-3 rounded-2xl flex items-center gap-3 shadow-xl backdrop-blur-md transform scale-95 group-hover:scale-100 transition-transform">
+                {isPlaying ? (
+                  <>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <rect x="6" y="4" width="4" height="16" rx="1" />
+                      <rect x="14" y="4" width="4" height="16" rx="1" />
+                    </svg>
+                    <span className="text-xs font-black uppercase tracking-widest">
+                      Pause
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    <span className="text-xs font-black uppercase tracking-widest">
+                      Play
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* Styled Audio Button */}
             <button
               onClick={toggleAudio}
               className="absolute bottom-6 right-6 z-20 bg-[#181922]/90 hover:bg-[#181922] border border-white/20 text-[#F2EFE9] px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md backdrop-blur-sm cursor-pointer"
-              title={isMuted ? "Ativar som" : "Desativar som"}
+              title={isMuted ? "Unmute" : "Mute"}
             >
               {isMuted ? (
                 <>

@@ -23,7 +23,7 @@ interface FilterItem {
   icon?: StaticImageData;
 }
 
-// ==================== CONSTANTES ====================
+// ==================== CONSTANTS ====================
 const minecraftLongVideo: VideoItem = {
   creator: "@YouBrenno",
   title: "Minecraft Edit!",
@@ -31,6 +31,7 @@ const minecraftLongVideo: VideoItem = {
   type: "horizontal",
   videoFile: "/videos/talvezfim_1.mp4",
 };
+
 const minecraftEdits: VideoItem[] = [
   {
     creator: "@YouBrenno",
@@ -103,74 +104,69 @@ function getYoutubeId(url?: string): string | null {
   return null;
 }
 
-// ==================== COMPONENTE PRINCIPAL ====================
+// ==================== MAIN COMPONENT ====================
 export default function Edits() {
   const [activeFilter, setActiveFilter] = useState<
     "all" | "minecraft" | "roblox"
   >("all");
 
   return (
-    <>
-      <style>{`
-        @keyframes titleGlow {
-          0%, 100% { text-shadow: 0 0 18px rgba(127,212,255,0.55), 0 0 40px rgba(127,212,255,0.25); }
-          50%      { text-shadow: 0 0 26px rgba(127,212,255,0.75), 0 0 56px rgba(127,212,255,0.35); }
-        }
-        .title-glow {
-          animation: titleGlow 3.2s ease-in-out infinite;
-        }
-      `}</style>
-
-      <section
-        id="edits"
-        className="relative w-full overflow-x-hidden py-16 px-6 flex flex-col items-center"
-        style={{ backgroundColor: "#050912" }}
-      >
-        {/* ── PERSONAGEM + TÍTULO ── */}
-        <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-white border-[4px] border-[#F2EFE9] rounded-full overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,0.35)] mb-5 transition-transform duration-300 ease-out hover:scale-105">
+    <section
+      id="edits"
+      className="relative w-full overflow-x-hidden py-24 px-6 md:px-12 flex flex-col items-center bg-[#070b16]"
+    >
+      {/* ── HEADER / TITLE SECTION ── */}
+      <div className="flex flex-col items-center text-center mb-16">
+        <div className="relative w-24 h-24 sm:w-28 sm:h-28 bg-[#0F1B3A] border-4 border-[#F2EFE9] rounded-full overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,0.5)] mb-6 transition-transform duration-300 hover:scale-105">
           <Image
             src={YouBrenno}
             alt="YouBrenno Avatar"
             fill
-            className="object-cover scale-[1.02]"
+            className="object-cover"
           />
         </div>
 
-        <h2 className="title-glow text-4xl font-bold text-[#F2EFE9] mb-10 text-center uppercase tracking-tighter">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-[#F2EFE9] tracking-tight uppercase mb-3">
           Portfolio Videos
         </h2>
+        <p className="text-sm md:text-base text-[#F2EFE9]/70 font-medium max-w-xl">
+          High-retention edits tailored for top creators. Click to play or
+          pause.
+        </p>
+      </div>
 
-        {/* ── TABS DE FILTRO ── */}
-        <div className="relative z-10 flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-16">
-          {filters.map((f) => {
-            const isActive = activeFilter === f.key;
-            return (
-              <button
-                key={f.key}
-                onClick={() => setActiveFilter(f.key)}
-                className={`relative flex items-center gap-2 px-5 py-2.5 rounded-xl border-[3px] font-bold uppercase text-xs md:text-sm tracking-widest transition-all ${
-                  isActive
-                    ? "bg-[#F2EFE9] text-[#0A1128] border-[#F2EFE9] shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]"
-                    : "bg-transparent text-[#F2EFE9] border-[#F2EFE9]/30 hover:border-[#F2EFE9]/70"
-                }`}
-              >
-                {f.icon && (
-                  <span className="relative w-4 h-4 rounded-sm overflow-hidden shrink-0">
-                    <Image
-                      src={f.icon}
-                      alt={f.label}
-                      fill
-                      className="object-cover"
-                    />
-                  </span>
-                )}
-                {f.label}
-              </button>
-            );
-          })}
-        </div>
+      {/* ── FILTER TABS ── */}
+      <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
+        {filters.map((f) => {
+          const isActive = activeFilter === f.key;
+          return (
+            <button
+              key={f.key}
+              onClick={() => setActiveFilter(f.key)}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl border-2 font-bold uppercase text-xs md:text-sm tracking-wider transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0.4)] ${
+                isActive
+                  ? "bg-[#F2EFE9] text-[#070b16] border-[#F2EFE9] translate-x-0.5 translate-y-0.5 shadow-none"
+                  : "bg-[#0F1B3A] text-[#F2EFE9] border-[#F2EFE9]/20 hover:border-[#F2EFE9]/60 hover:-translate-y-0.5"
+              }`}
+            >
+              {f.icon && (
+                <span className="relative w-4 h-4 rounded overflow-hidden shrink-0">
+                  <Image
+                    src={f.icon}
+                    alt={f.label}
+                    fill
+                    className="object-cover"
+                  />
+                </span>
+              )}
+              {f.label}
+            </button>
+          );
+        })}
+      </div>
 
-        {/* ── MINECRAFT ── */}
+      {/* ── NICHE SECTIONS ── */}
+      <div className="w-full max-w-6xl flex flex-col gap-20">
         {(activeFilter === "all" || activeFilter === "minecraft") && (
           <NicheSection
             title="Minecraft"
@@ -184,14 +180,13 @@ export default function Edits() {
           </NicheSection>
         )}
 
-        {/* ── ROBLOX ── */}
         {(activeFilter === "all" || activeFilter === "roblox") && (
           <NicheSection title="Roblox" icon={RobloxLogo} viewMoreHref="/roblox">
             <NicheLayout longVideo={robloxLongVideo} shorts={robloxEdits} />
           </NicheSection>
         )}
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
@@ -203,7 +198,7 @@ function NicheLayout({
   shorts: VideoItem[];
 }) {
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-8">
       <div className="w-full">
         <VideoCard item={longVideo} />
       </div>
@@ -228,45 +223,31 @@ function NicheSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full max-w-6xl mb-24">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b-2 border-[#F2EFE9]/15 pb-4 gap-4">
-        <div className="flex items-center gap-4">
+    <div className="w-full flex flex-col gap-8">
+      <div className="flex items-center justify-between border-b-2 border-[#F2EFE9]/10 pb-4">
+        <div className="flex items-center gap-3">
           {icon && (
-            <div className="w-12 h-12 bg-white/5 rounded-lg border-2 border-[#F2EFE9]/30 flex items-center justify-center overflow-hidden shrink-0 relative">
+            <div className="w-10 h-10 rounded-lg border-2 border-[#F2EFE9]/20 overflow-hidden relative shrink-0 shadow-sm">
               <Image
                 src={icon}
                 alt={`${title} icon`}
                 fill
-                className="object-cover scale-[1.1]"
+                className="object-cover"
               />
             </div>
           )}
-          <h3 className="text-3xl font-bold text-[#F2EFE9] uppercase tracking-tighter leading-none">
+          <h3 className="text-2xl md:text-3xl font-extrabold text-[#F2EFE9] uppercase tracking-tight">
             {title}
           </h3>
         </div>
 
         <a
           href={viewMoreHref}
-          className="group flex items-center gap-2 text-[#F2EFE9] font-bold text-sm uppercase tracking-widest hover:opacity-70 transition-all cursor-pointer"
+          className="group flex items-center gap-2 text-[#F2EFE9] font-bold text-xs md:text-sm uppercase tracking-wider hover:opacity-70 transition-all"
         >
           View More
           <span className="transition-transform group-hover:translate-x-1">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5 12H19M19 12L12 5M19 12L12 19"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            →
           </span>
         </a>
       </div>
@@ -278,12 +259,25 @@ function NicheSection({
 
 function VideoCard({ item }: { item: VideoItem }) {
   const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const videoId = getYoutubeId(item.videoUrl);
   const embedUrl = videoId
     ? `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&iv_load_policy=3`
     : null;
+
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
+    }
+  };
 
   const toggleAudio = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -294,11 +288,12 @@ function VideoCard({ item }: { item: VideoItem }) {
   };
 
   return (
-    <div className="flex flex-col gap-3 group w-full">
+    <div className="flex flex-col gap-3 group/card w-full">
       <div
-        className={`relative w-full bg-[#0F1B3A] rounded-2xl border-2 border-[#F2EFE9]/15 overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,0.35)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none hover:border-[#F2EFE9]/40 ${
-          item.type === "vertical" ? "aspect-[9/16]" : "aspect-video"
-        }`}
+        onClick={item.videoFile ? togglePlayPause : undefined}
+        className={`relative w-full bg-[#0F1B3A] rounded-2xl border-2 border-[#F2EFE9]/20 overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#F2EFE9]/50 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none ${
+          item.videoFile ? "cursor-pointer" : ""
+        } ${item.type === "vertical" ? "aspect-[9/16]" : "aspect-video"}`}
       >
         {item.videoFile ? (
           <>
@@ -314,14 +309,52 @@ function VideoCard({ item }: { item: VideoItem }) {
               disablePictureInPicture
             >
               <source src={item.videoFile} type="video/mp4" />
-              Seu navegador não suporta vídeos.
+              Your browser does not support video.
             </video>
 
-            {/* Botão de Som no Cantinho */}
+            {/* Overlay indicando Click to Pause / Click to Play no Hover ou ao estar Pausado */}
+            <div
+              className={`absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-2 transition-opacity duration-200 ${
+                !isPlaying
+                  ? "opacity-100 bg-black/60 backdrop-blur-[2px]"
+                  : "opacity-0 group-hover/card:opacity-100"
+              }`}
+            >
+              <div className="w-16 h-16 rounded-full bg-[#070b16]/90 border-2 border-[#F2EFE9] flex items-center justify-center text-[#F2EFE9] shadow-2xl scale-95 group-hover/card:scale-100 transition-transform">
+                {isPlaying ? (
+                  // Ícone de Pause
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+                    <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+                  </svg>
+                ) : (
+                  // Ícone de Play
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="translate-x-0.5"
+                  >
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                )}
+              </div>
+              <span className="text-xs font-extrabold text-[#F2EFE9] uppercase tracking-widest drop-shadow-md">
+                {isPlaying ? "Click to Pause" : "Click to Play"}
+              </span>
+            </div>
+
+            {/* Audio Button */}
             <button
               onClick={toggleAudio}
-              className="absolute bottom-4 right-4 z-20 bg-[#0A1128]/80 hover:bg-[#0A1128] border border-white/20 text-[#F2EFE9] px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md backdrop-blur-sm cursor-pointer"
-              title={isMuted ? "Ativar som" : "Desativar som"}
+              className="absolute bottom-4 right-4 z-20 bg-[#070b16]/90 hover:bg-[#070b16] border border-[#F2EFE9]/30 text-[#F2EFE9] px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-lg backdrop-blur-md cursor-pointer"
+              title={isMuted ? "Unmute" : "Mute"}
             >
               {isMuted ? (
                 <>
@@ -376,16 +409,16 @@ function VideoCard({ item }: { item: VideoItem }) {
           </div>
         )}
 
-        <div className="absolute top-4 left-4 z-10 bg-[#0A1128]/90 text-[#F2EFE9] text-[10px] font-bold px-3 py-1 rounded-lg uppercase pointer-events-none border border-white/10">
+        <div className="absolute top-4 left-4 z-10 bg-[#070b16]/90 border border-[#F2EFE9]/20 text-[#F2EFE9] text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider backdrop-blur-md pointer-events-none">
           {item.category}
         </div>
       </div>
 
-      <div className="px-2">
-        <h4 className="font-bold text-[#F2EFE9] leading-tight line-clamp-1 text-xl">
+      <div className="px-1">
+        <h4 className="font-bold text-[#F2EFE9] text-lg md:text-xl leading-tight">
           {item.title}
         </h4>
-        <p className="text-xs font-sans text-[#F2EFE9]/50 font-bold uppercase tracking-widest mt-1">
+        <p className="text-xs font-bold text-[#F2EFE9]/50 uppercase tracking-widest mt-1">
           {item.creator}
         </p>
       </div>
