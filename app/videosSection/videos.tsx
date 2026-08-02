@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 import YouBrenno from "../favicon.ico";
 import RobloxLogo from "../../public/roblox.png";
@@ -14,7 +14,6 @@ interface VideoItem {
   category: string;
   type: "horizontal" | "vertical";
   videoUrl?: string;
-  videoFile?: string;
 }
 
 interface FilterItem {
@@ -29,7 +28,7 @@ const minecraftLongVideo: VideoItem = {
   title: "Minecraft Edit!",
   category: "Long Form",
   type: "horizontal",
-  videoFile: "/videos/talvezfim_1.mp4",
+  videoUrl: "https://www.youtube.com/watch?v=r6FSyJpabZc",
 };
 
 const minecraftEdits: VideoItem[] = [
@@ -61,7 +60,7 @@ const robloxLongVideo: VideoItem = {
   title: "Roblox Rivals 👑",
   category: "Long Form",
   type: "horizontal",
-  videoFile: "/videos/RobloxRivalsEdit.mp4",
+  videoUrl: "https://www.youtube.com/watch?v=r6FSyJpabZc",
 };
 
 const robloxEdits: VideoItem[] = [
@@ -130,8 +129,7 @@ export default function Edits() {
           Portfolio Videos
         </h2>
         <p className="text-sm md:text-base text-[#F2EFE9]/70 font-medium max-w-xl">
-          High-retention edits tailored for top creators. Click to play or
-          pause.
+          High-retention edits tailored for top creators. Click to play.
         </p>
       </div>
 
@@ -258,150 +256,25 @@ function NicheSection({
 }
 
 function VideoCard({ item }: { item: VideoItem }) {
-  const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
   const videoId = getYoutubeId(item.videoUrl);
   const embedUrl = videoId
     ? `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&iv_load_policy=3`
     : null;
 
-  const togglePlayPause = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        videoRef.current.play();
-        setIsPlaying(true);
-      }
-    }
-  };
-
-  const toggleAudio = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-3 group/card w-full">
       <div
-        onClick={item.videoFile ? togglePlayPause : undefined}
         className={`relative w-full bg-[#0F1B3A] rounded-2xl border-2 border-[#F2EFE9]/20 overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#F2EFE9]/50 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none ${
-          item.videoFile ? "cursor-pointer" : ""
-        } ${item.type === "vertical" ? "aspect-[9/16]" : "aspect-video"}`}
+          item.type === "vertical" ? "aspect-[9/16]" : "aspect-video"
+        }`}
       >
-        {item.videoFile ? (
-          <>
-            <video
-              ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              controls={false}
-              disablePictureInPicture
-            >
-              <source src={item.videoFile} type="video/mp4" />
-              Your browser does not support video.
-            </video>
-
-            {/* Overlay indicando Click to Pause / Click to Play no Hover ou ao estar Pausado */}
-            <div
-              className={`absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-2 transition-opacity duration-200 ${
-                !isPlaying
-                  ? "opacity-100 bg-black/60 backdrop-blur-[2px]"
-                  : "opacity-0 group-hover/card:opacity-100"
-              }`}
-            >
-              <div className="w-16 h-16 rounded-full bg-[#070b16]/90 border-2 border-[#F2EFE9] flex items-center justify-center text-[#F2EFE9] shadow-2xl scale-95 group-hover/card:scale-100 transition-transform">
-                {isPlaying ? (
-                  // Ícone de Pause
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <rect x="6" y="4" width="4" height="16" rx="1"></rect>
-                    <rect x="14" y="4" width="4" height="16" rx="1"></rect>
-                  </svg>
-                ) : (
-                  // Ícone de Play
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="translate-x-0.5"
-                  >
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                )}
-              </div>
-              <span className="text-xs font-extrabold text-[#F2EFE9] uppercase tracking-widest drop-shadow-md">
-                {isPlaying ? "Click to Pause" : "Click to Play"}
-              </span>
-            </div>
-
-            {/* Audio Button */}
-            <button
-              onClick={toggleAudio}
-              className="absolute bottom-4 right-4 z-20 bg-[#070b16]/90 hover:bg-[#070b16] border border-[#F2EFE9]/30 text-[#F2EFE9] px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-lg backdrop-blur-md cursor-pointer"
-              title={isMuted ? "Unmute" : "Mute"}
-            >
-              {isMuted ? (
-                <>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <line x1="23" y1="9" x2="17" y2="15"></line>
-                    <line x1="17" y1="9" x2="23" y2="15"></line>
-                  </svg>
-                  <span>Mute</span>
-                </>
-              ) : (
-                <>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                  </svg>
-                  <span>Sound On</span>
-                </>
-              )}
-            </button>
-          </>
-        ) : embedUrl ? (
+        {embedUrl ? (
           <iframe
-            className="absolute inset-0 w-full h-full"
+            className="absolute inset-0 w-full h-full border-0"
             src={embedUrl}
             title={item.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            style={{ border: 0 }}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-[#0F1B3A] text-[#F2EFE9]/40 font-sans italic p-6 text-center text-sm">

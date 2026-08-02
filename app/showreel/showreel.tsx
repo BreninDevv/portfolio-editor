@@ -1,17 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import RobloxLogo from "../../public/roblox.png";
 import Minecraft from "../../public/minecraft.jpg";
 
 export default function Showreel() {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const nicheData = [
     {
@@ -27,25 +23,6 @@ export default function Showreel() {
       icon: Minecraft,
     },
   ];
-
-  const toggleAudio = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
 
   // --- INTERACTIVE BACKGROUND GRID ---
   useEffect(() => {
@@ -262,108 +239,19 @@ export default function Showreel() {
 
         <div className="relative w-full max-w-4xl">
           <div
-            className="aspect-video border-2 border-[#181922] bg-[#111114] relative overflow-hidden shadow-[8px_8px_0px_0px_rgba(24,25,34,1)] cursor-pointer group"
+            className="aspect-video border-2 border-[#181922] bg-[#111114] relative overflow-hidden shadow-[8px_8px_0px_0px_rgba(24,25,34,1)]"
             style={{
               borderRadius: "2.5rem",
               isolation: "isolate",
             }}
-            onClick={togglePlay}
           >
-            <video
-              ref={videoRef}
-              className="w-full h-full object-cover block"
-              style={{ borderRadius: "2.5rem" }}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              controls={false}
-              disablePictureInPicture
-            >
-              <source src="/videos/PortfolioIntro.mp4" type="video/mp4" />
-              Your browser does not support videos.
-            </video>
-
-            {/* Centralized Play/Pause Badge Indicator */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="bg-[#181922]/85 border border-white/20 text-[#F2EFE9] px-6 py-3 rounded-2xl flex items-center gap-3 shadow-xl backdrop-blur-md transform scale-95 group-hover:scale-100 transition-transform">
-                {isPlaying ? (
-                  <>
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <rect x="6" y="4" width="4" height="16" rx="1" />
-                      <rect x="14" y="4" width="4" height="16" rx="1" />
-                    </svg>
-                    <span className="text-xs font-black uppercase tracking-widest">
-                      Pause
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <polygon points="5 3 19 12 5 21 5 3" />
-                    </svg>
-                    <span className="text-xs font-black uppercase tracking-widest">
-                      Play
-                    </span>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {/* Styled Audio Button */}
-            <button
-              onClick={toggleAudio}
-              className="absolute bottom-6 right-6 z-20 bg-[#181922]/90 hover:bg-[#181922] border border-white/20 text-[#F2EFE9] px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md backdrop-blur-sm cursor-pointer"
-              title={isMuted ? "Unmute" : "Mute"}
-            >
-              {isMuted ? (
-                <>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <line x1="23" y1="9" x2="17" y2="15"></line>
-                    <line x1="17" y1="9" x2="23" y2="15"></line>
-                  </svg>
-                  <span>Mute</span>
-                </>
-              ) : (
-                <>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                  </svg>
-                  <span>Sound On</span>
-                </>
-              )}
-            </button>
+            <iframe
+              src="https://www.youtube.com/embed/xSY57_VWS44?autoplay=1&mute=1&loop=1&playlist=xSY57_VWS44&controls=1&modestbranding=1"
+              title="Showreel Intro"
+              className="w-full h-full border-0 absolute inset-0 object-cover"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
         </div>
 
