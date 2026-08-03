@@ -60,7 +60,8 @@ const robloxLongVideo: VideoItem = {
   title: "Roblox Rivals 👑",
   category: "Long Form",
   type: "horizontal",
-  videoUrl: "https://www.youtube.com/watch?v=r6FSyJpabZc",
+  videoUrl:
+    "https://www.youtube.com/watch?v=C4hA6atv5hk&list=PLl8Ya8sw1GHwCkqq6KLJxjC7aKJ_eieIZ",
 };
 
 const robloxEdits: VideoItem[] = [
