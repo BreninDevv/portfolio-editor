@@ -254,12 +254,7 @@ export default function Hero() {
             >
               Intro
             </a>
-            <a
-              href="#skills"
-              className="hover:text-[#181922] transition-colors"
-            >
-              Skills
-            </a>
+
             <a href="#edits" className="hover:text-[#181922] transition-colors">
               Edits
             </a>
@@ -311,11 +306,7 @@ export default function Hero() {
               Edits
             </a>
           </li>
-          <li>
-            <a href="#skills" onClick={() => setMenu(false)}>
-              Skills
-            </a>
-          </li>
+
           <li>
             <a href="#contact" onClick={() => setMenu(false)}>
               Contact
