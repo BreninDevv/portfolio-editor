@@ -1,6 +1,7 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
+import type { ReactNode } from "react";
 import { useState } from "react";
 
 import YouBrenno from "../favicon.ico";
@@ -113,11 +114,11 @@ export default function Edits() {
   return (
     <section
       id="edits"
-      className="relative w-full overflow-x-hidden py-24 px-6 md:px-12 flex flex-col items-center bg-[#070b16]"
+      className="relative w-full overflow-x-hidden py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 flex flex-col items-center bg-[#070b16]"
     >
       {/* ── HEADER / TITLE SECTION ── */}
-      <div className="flex flex-col items-center text-center mb-16">
-        <div className="relative w-24 h-24 sm:w-28 sm:h-28 bg-[#0F1B3A] border-4 border-[#F2EFE9] rounded-full overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,0.5)] mb-6 transition-transform duration-300 hover:scale-105">
+      <div className="flex flex-col items-center text-center mb-10 sm:mb-16">
+        <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-[#0F1B3A] border-2 sm:border-4 border-[#F2EFE9] rounded-full overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.5)] mb-4 sm:mb-6 transition-transform duration-300 hover:scale-105">
           <Image
             src={YouBrenno}
             alt="YouBrenno Avatar"
@@ -126,30 +127,30 @@ export default function Edits() {
           />
         </div>
 
-        <h2 className="text-4xl md:text-5xl font-extrabold text-[#F2EFE9] tracking-tight uppercase mb-3">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#F2EFE9] tracking-tight uppercase mb-2 sm:mb-3 px-2">
           Portfolio Videos
         </h2>
-        <p className="text-sm md:text-base text-[#F2EFE9]/70 font-medium max-w-xl">
+        <p className="text-xs sm:text-sm md:text-base text-[#F2EFE9]/70 font-medium max-w-xl px-2">
           High-retention edits tailored for top creators. Click to play.
         </p>
       </div>
 
       {/* ── FILTER TABS ── */}
-      <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10 sm:mb-16 w-full">
         {filters.map((f) => {
           const isActive = activeFilter === f.key;
           return (
             <button
               key={f.key}
               onClick={() => setActiveFilter(f.key)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl border-2 font-bold uppercase text-xs md:text-sm tracking-wider transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0.4)] ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl border-2 font-bold uppercase text-[10px] sm:text-xs md:text-sm tracking-wider transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,0.4)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.4)] ${
                 isActive
                   ? "bg-[#F2EFE9] text-[#070b16] border-[#F2EFE9] translate-x-0.5 translate-y-0.5 shadow-none"
                   : "bg-[#0F1B3A] text-[#F2EFE9] border-[#F2EFE9]/20 hover:border-[#F2EFE9]/60 hover:-translate-y-0.5"
               }`}
             >
               {f.icon && (
-                <span className="relative w-4 h-4 rounded overflow-hidden shrink-0">
+                <span className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 rounded overflow-hidden shrink-0">
                   <Image
                     src={f.icon}
                     alt={f.label}
@@ -165,7 +166,7 @@ export default function Edits() {
       </div>
 
       {/* ── NICHE SECTIONS ── */}
-      <div className="w-full max-w-6xl flex flex-col gap-20">
+      <div className="w-full max-w-6xl flex flex-col gap-14 sm:gap-16 md:gap-20">
         {(activeFilter === "all" || activeFilter === "minecraft") && (
           <NicheSection
             title="Minecraft"
@@ -197,11 +198,11 @@ function NicheLayout({
   shorts: VideoItem[];
 }) {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6 sm:gap-8">
       <div className="w-full">
         <VideoCard item={longVideo} />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 items-start">
         {shorts.map((item, index) => (
           <VideoCard key={index} item={item} />
         ))}
@@ -219,14 +220,14 @@ function NicheSection({
   title: string;
   icon?: StaticImageData;
   viewMoreHref?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <div className="w-full flex flex-col gap-8">
-      <div className="flex items-center justify-between border-b-2 border-[#F2EFE9]/10 pb-4">
-        <div className="flex items-center gap-3">
+    <div className="w-full flex flex-col gap-6 sm:gap-8">
+      <div className="flex flex-row items-center justify-between gap-3 border-b-2 border-[#F2EFE9]/10 pb-3 sm:pb-4">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           {icon && (
-            <div className="w-10 h-10 rounded-lg border-2 border-[#F2EFE9]/20 overflow-hidden relative shrink-0 shadow-sm">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg border-2 border-[#F2EFE9]/20 overflow-hidden relative shrink-0 shadow-sm">
               <Image
                 src={icon}
                 alt={`${title} icon`}
@@ -235,16 +236,17 @@ function NicheSection({
               />
             </div>
           )}
-          <h3 className="text-2xl md:text-3xl font-extrabold text-[#F2EFE9] uppercase tracking-tight">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#F2EFE9] uppercase tracking-tight truncate">
             {title}
           </h3>
         </div>
 
         <a
           href={viewMoreHref}
-          className="group flex items-center gap-2 text-[#F2EFE9] font-bold text-xs md:text-sm uppercase tracking-wider hover:opacity-70 transition-all"
+          className="group flex items-center gap-1.5 sm:gap-2 text-[#F2EFE9] font-bold text-[10px] sm:text-xs md:text-sm uppercase tracking-wider hover:opacity-70 transition-all shrink-0"
         >
-          View More
+          <span className="hidden sm:inline">View More</span>
+          <span className="sm:hidden">More</span>
           <span className="transition-transform group-hover:translate-x-1">
             →
           </span>
@@ -263,9 +265,9 @@ function VideoCard({ item }: { item: VideoItem }) {
     : null;
 
   return (
-    <div className="flex flex-col gap-3 group/card w-full">
+    <div className="flex flex-col gap-2 sm:gap-3 group/card w-full">
       <div
-        className={`relative w-full bg-[#0F1B3A] rounded-2xl border-2 border-[#F2EFE9]/20 overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#F2EFE9]/50 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none ${
+        className={`relative w-full bg-[#0F1B3A] rounded-xl sm:rounded-2xl border-2 border-[#F2EFE9]/20 overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,0.4)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#F2EFE9]/50 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none ${
           item.type === "vertical" ? "aspect-[9/16]" : "aspect-video"
         }`}
       >
@@ -278,21 +280,21 @@ function VideoCard({ item }: { item: VideoItem }) {
             allowFullScreen
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-[#0F1B3A] text-[#F2EFE9]/40 font-sans italic p-6 text-center text-sm">
+          <div className="w-full h-full flex items-center justify-center bg-[#0F1B3A] text-[#F2EFE9]/40 font-sans italic p-4 sm:p-6 text-center text-xs sm:text-sm">
             {item.title} <br /> (Video URL not set)
           </div>
         )}
 
-        <div className="absolute top-4 left-4 z-10 bg-[#070b16]/90 border border-[#F2EFE9]/20 text-[#F2EFE9] text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider backdrop-blur-md pointer-events-none">
+        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10 bg-[#070b16]/90 border border-[#F2EFE9]/20 text-[#F2EFE9] text-[9px] sm:text-[10px] font-bold px-2 py-0.5 sm:px-3 sm:py-1 rounded-md sm:rounded-lg uppercase tracking-wider backdrop-blur-md pointer-events-none">
           {item.category}
         </div>
       </div>
 
       <div className="px-1">
-        <h4 className="font-bold text-[#F2EFE9] text-lg md:text-xl leading-tight">
+        <h4 className="font-bold text-[#F2EFE9] text-base sm:text-lg md:text-xl leading-tight">
           {item.title}
         </h4>
-        <p className="text-xs font-bold text-[#F2EFE9]/50 uppercase tracking-widest mt-1">
+        <p className="text-[10px] sm:text-xs font-bold text-[#F2EFE9]/50 uppercase tracking-widest mt-1">
           {item.creator}
         </p>
       </div>

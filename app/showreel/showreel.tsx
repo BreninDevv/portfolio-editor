@@ -26,6 +26,10 @@ export default function Showreel() {
 
   // --- INTERACTIVE BACKGROUND GRID ---
   useEffect(() => {
+    // No mobile o grid fica desligado (menos processamento = menos travamento)
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    if (isMobile) return;
+
     const canvas = canvasRef.current;
     const wrapper = sectionRef.current;
     if (!canvas || !wrapper) return;
@@ -224,7 +228,10 @@ export default function Showreel() {
         background: "#dbeafe",
       }}
     >
-      <canvas ref={canvasRef} className="absolute inset-0 z-0 w-full h-full" />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-0 w-full h-full hidden md:block"
+      />
 
       <div className="relative z-10 max-w-6xl w-full mx-auto flex flex-col items-center">
         <h2

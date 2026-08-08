@@ -27,6 +27,10 @@ export default function Hero() {
 
   // --- BACKGROUND GRID INTERATIVO (turbulencia + sink no mouse) ---
   useEffect(() => {
+    // No mobile o grid fica desligado (menos processamento = menos travamento)
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    if (isMobile) return;
+
     const canvas = canvasRef.current;
     const wrapper = sectionRef.current;
     if (!canvas || !wrapper) return;
@@ -323,8 +327,11 @@ export default function Hero() {
         />
       )}
 
-      {/* --- BACKGROUND GRID INTERATIVO --- */}
-      <canvas ref={canvasRef} className="absolute inset-0 z-0 w-full h-full" />
+      {/* --- BACKGROUND GRID INTERATIVO (oculto no mobile) --- */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-0 w-full h-full hidden md:block"
+      />
 
       {/* --- HERO CONTENT --- */}
       <div className="relative z-10 text-center flex flex-col items-center w-full max-w-4xl px-4">
